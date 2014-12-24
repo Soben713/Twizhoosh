@@ -1,5 +1,5 @@
 from smart_handlers_list import handler_classes
-from smart_handlers.base_handler import JustRepliedException
+from smart_handlers.base.base_handler import JustRepliedException
 from utils import debug
 
 
