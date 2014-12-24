@@ -11,7 +11,7 @@ if __name__ == '__main__':
 	manager = SmartHandlersManager(twitter = TestTwitter())
 
 	while True:
-		timeline_update = raw_input("Specify a sample timeline update message to see the what @Twizhoosh does\n").decode('utf-8')
+		timeline_update = raw_input("Enter a tweet message to see how @Twizhoosh responses\n").decode('utf-8')
 		manager.on_timeline_update({
 			'text': timeline_update,
 			'id': 123456789,
