@@ -1,6 +1,7 @@
 import os
 import time
-from twython import Twython
+from twython import *
+from smart_handlers_list import handler_classes
 
 CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
@@ -9,34 +10,35 @@ OAUTH_TOKEN_SECRET = os.environ['TWITTER_OAUTH_TOKEN_SECRET']
 TWEET_LENGTH = 140
 TWEET_URL_LENGTH = 21
 
-TWEET_EVERY_N_SECONDS = 60*1 # e.g. 60*10 = ten minutes between each tweet
 
-def twitter_handle():
-    return Twython(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+class MyStreamer(TwythonStreamer):
+	def __init__(self, *args, **kwargs):
+		super(MyStreamer, self).__init__(*args, **kwargs)
+		self.twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 
-def submit_tweet(message, handle=None):
-    if not handle:
-        handle = twitter_handle()
-    handle.update_status(status=message)
+		self.smart_handlers = []
+		for handler in handler_classes:
+			self.smart_handlers.append(handler(twitter = self.twitter))
 
-def get_message(handle):
-    """
-    Your code goes here!
-    """
-    import random
-    r = random.randint(0, 1000)
-    message = 'I TWEET THIS. %s' % r
-    assert len(message) <= TWEET_LENGTH
-    return message
+	def on_success(self, data):
+		for smart_handler in self.smart_handlers:
+			smart_handler.timeline_update(data)
+
+	def on_error(self, status_code, data):
+		print status_code, data
+
 
 def main():
-    handle = twitter_handle()
-    while True:
-        message = get_message(handle)
-        print message
-        submit_tweet(message, handle)
-        time.sleep(TWEET_EVERY_N_SECONDS)
+	while True:
+		print "Starting"
+		try:
+			stream = MyStreamer(CONSUMER_KEY, CONSUMER_SECRET, 
+				OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+			stream.user(replies="all")
+		except TwythonRateLimitError as e:
+			print "Rate limit error, retrying after %s seconds" % e.retry_after
+			time.sleep(e.retry_after)
 
 
 if __name__ == '__main__':
-    main()
+	main()
