@@ -14,7 +14,9 @@ if __name__ == '__main__':
 		timeline_update = raw_input("Specify a sample timeline update message to see the what @Twizhoosh does\n").decode('utf-8')
 		manager.on_timeline_update({
 			'text': timeline_update,
+			'id': 123456789,
+			'id_str': '123456789',
 			'user': {
-				'screen_name': 'test_user'
+				'screen_name': 'test_user',
 			}
 		})
