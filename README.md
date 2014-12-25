@@ -1,6 +1,6 @@
 # Twizhoosh
 
-[Twizhoosh](https://twitter.com/twizhoosh) is a smart Persian twitter-bot, written in Python and aimed to be easily readable and contributable.
+[@Twizhoosh](https://twitter.com/twizhoosh) is a smart Persian twitter-bot, written in Python and aimed to be easily readable and contributable.
  
 ## Know Him Better
 - Twizhoosh does not talk too much and will not bother people who follow him.
