@@ -1,7 +1,7 @@
 import os
 
 def log(text):
-	print text
+	print(text)
 
 
 def debug(text):
