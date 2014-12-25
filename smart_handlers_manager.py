@@ -1,13 +1,11 @@
 from smart_handlers.base.base_handler import JustRepliedException
 from utils import debug
-import pkgutil
-import sys
-import inspect
-import smart_handlers
-import importlib
 import os.path
+import sys, pkgutil
+import inspect, importlib
+import smart_handlers
 
-handlers_path = 'smart_handlers'
+HANDLERS_PATH = 'smart_handlers'
 
 def load_all_plugins(dirname):
 	loaded_plugins = []
@@ -29,14 +27,12 @@ class SmartHandlersManager:
 	A timeline update dispatcher between Smart Handlers
 	'''
 	def __init__(self, twitter, *args, **kwargs):
-		self.smart_handlers = []
-		handler_classes = load_all_plugins(handlers_path)
-		for handler in handler_classes:
-			self.smart_handlers.append(handler(twitter = twitter))
+		handler_classes = load_all_plugins(HANDLERS_PATH)
+		self.smart_handlers = [handler(twitter) for handler in handler_classes]
 
 	def on_timeline_update(self, data):
 		try:
 			for smart_handler in self.smart_handlers:
 				smart_handler.timeline_update(data)
 		except JustRepliedException as e:
-			debug(u'Just replied with:\n %s' % e.tweet)
+			debug(u'Just replied with:\n {0}'.format(e.tweet))

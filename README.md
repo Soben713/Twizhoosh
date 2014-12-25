@@ -31,4 +31,4 @@ For adding a smart handler, create a python package in `smart_handlers` with nam
 Before submitting a pull request, test your feature. You can do it by running `test.py` and simulating the timeline.
 
 ## Requirements
-You need `Python 3.4` or later to run the test code. You'll need `twython` for running the whole bot.
+You need `Python 3.4` or later and `twython 3.0` to run the code.

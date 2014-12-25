@@ -3,8 +3,7 @@
 
 from .base_handler import BaseHandler
 from twython import *
-import re
-import random
+import re, random
 from utils import debug, log
 from abc import ABCMeta,abstractmethod
 
