@@ -22,9 +22,20 @@ class MyStreamer(TwythonStreamer):
 		self.twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 		self.smart_handlers_manager = SmartHandlersManager(self.twitter)
 
+	def is_a_tweet(self, data):
+		'''
+		This is a dirty way to do it, I know. But what else can I do?
+		'''
+		if 'text' in data and 'user' in data and 'id_str' in data:
+			return True
+		return False
 
 	def on_success(self, data):
-		self.smart_handlers_manager.on_timeline_update(data)
+		if self.is_a_tweet(data):
+			log("Timeline update: %s [%s]" % (data[u'user'][u'screen_name'], data[u'id_str']))
+			self.smart_handlers_manager.on_timeline_update(data)
+		else:
+			log("Got non status message: \n %s \n" % data)
 
 
 	def on_error(self, status_code, data):
