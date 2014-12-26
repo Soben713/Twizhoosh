@@ -6,7 +6,7 @@
 - Twizhoosh does not talk too much and will not bother people who follow him.
 - He does not reply to a tweet more than once.
 - He never replies to people he is not following.
-- He does not have any memory.
+- He does not have any long term memory.
 - He would not be rude to anyone, unless it is neccessary.
 - He is smart.
  
