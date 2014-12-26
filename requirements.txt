@@ -1,1 +1,1 @@
-twython==3.0.0
+twython==3.2.0
