@@ -23,11 +23,12 @@ Are you willing to contribute to Twizhoosh? Great. If you only need to edit a fi
  
 ## Implementing a Feature
  
-Features like spelling correction, etc are called smart handlers. When someone Twizhoosh follows, tweets. The tweet is passed to smart handlers in the order specified in `smart_handlers_list.py`. The process ends as soon as a smart handler replies or the list ends.
+Features like spelling correction, etc are called smart handlers. When someone Twizhoosh follows, tweets. The tweet is passed to smart handlers in the order specified in `settings.py`. The process ends as soon as a smart handler replies or the list ends.
 
-For adding a smart handler, create a python package in `smart_handlers` with name of your feature. Create a python file in your package that contains a subclass of `BaseHandler` (which is implemented in `smart_handlers/base/base_handler.py`). This is the class you will implement your feature in. You may want to override the `timeline_update` method, which the new timeline tweet is passed to. For more information, I suggest you to take a look at the current smart handlers.
-
-After you finished implementing your smart handler, add it to `smart_handlers_list.py`.
+For adding a smart handler, create a python package in `smart_handlers` with name of your feature. Create a python module in your package that contains a subclass of `BaseHandler` (which is implemented in `smart_handlers/base/base_handler.py`). This is the class you will implement your feature in. You must implement the `timeline_update` method, which gets called for each new tweet in the timeline. For more information, I suggest you to take a look at the current smart handlers.
 
 ## Testing
 Before submitting a pull request, test your feature. You can do it by running `test.py` and simulating the timeline.
+
+## Requirements
+You need `Python 3.4` or later and `twython 3.2` to run the code.
