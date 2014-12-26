@@ -3,31 +3,22 @@ from utils import debug
 import os.path
 import sys, pkgutil
 import inspect, importlib
-import smart_handlers
+from settings import HANDLERS_PACKAGE,INSTALLED_HANDLERS
 
-HANDLERS_PATH = 'smart_handlers'
-
-def load_all_plugins(dirname):
-	loaded_plugins = []
-	# these are the plugin packages
-	for importer, package_name, _ in pkgutil.iter_modules([dirname]):
-		full_package_name = '{0}.{1}'.format(dirname, package_name)
-		plugins=importlib.import_module(full_package_name)
-		# now search all the modules for classes
-		for importer, plugin_name, _ in pkgutil.iter_modules([os.path.join(dirname,package_name)]):
-			module_name = '{0}.{1}'.format(full_package_name, plugin_name)
-			module=importlib.import_module(module_name)
-			for name, obj in inspect.getmembers(module, lambda m: hasattr(m,'timeline_update')):
-				if inspect.getmodule(obj) is module and not inspect.isabstract(obj):
-					loaded_plugins.append(obj)
-	return loaded_plugins
+def load_handlers(root_package):
+	handlers=[]
+	for handler in INSTALLED_HANDLERS:
+		(package_name,dot,class_name) = handler.rpartition('.')
+		module=importlib.import_module(root_package+dot+package_name)
+		handlers.append(getattr(module,class_name))
+	return handlers
 
 class SmartHandlersManager:
 	'''
 	A timeline update dispatcher between Smart Handlers
 	'''
 	def __init__(self, twitter, *args, **kwargs):
-		handler_classes = load_all_plugins(HANDLERS_PATH)
+		handler_classes = load_handlers(HANDLERS_PACKAGE)
 		self.smart_handlers = [handler(twitter) for handler in handler_classes]
 
 	def on_timeline_update(self, data):
