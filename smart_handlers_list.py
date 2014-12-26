@@ -4,6 +4,6 @@ from smart_handlers.spell_checker.spell_checker import SpellChecker
 
 handler_classes = [
 	SpellChecker,
-	GoodNight,
+	# GoodNight,
 	SayHi,
 ]
