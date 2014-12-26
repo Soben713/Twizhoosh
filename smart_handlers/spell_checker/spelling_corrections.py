@@ -114,4 +114,5 @@ spelling_corrections = {
 	u'حد اقل': u'حداقل',
 	u'جرأت': u'جرئت',
 	u'جرات': u'جرئت',
+	u'#[qQ]od([cC]|(30))': u'#QodC',
 }
