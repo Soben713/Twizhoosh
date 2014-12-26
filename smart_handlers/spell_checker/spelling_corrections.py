@@ -1,5 +1,5 @@
-#!/sr/bin/python
-# -*- coding: tf-8 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 # Wrong to correct
 
@@ -114,4 +114,5 @@ spelling_corrections = {
 	'جرات': 'جرئت',
 	'#qod([cC]|(30))': '#QodC',
 	'#Qod([c]|(30))': '#QodC',
+	'#قدسی': '#QodC',
 }
