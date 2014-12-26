@@ -1,4 +1,4 @@
-from spelling_corrections import spelling_corrections
+from .spelling_corrections import spelling_corrections
 from ..base import smart_reply_by_keyword
 
 class SpellChecker(smart_reply_by_keyword.SmartReplyByKeyword):
@@ -11,5 +11,8 @@ class SpellChecker(smart_reply_by_keyword.SmartReplyByKeyword):
 		for wrong in spelling_corrections.keys():
 			self.replies.append({
 				'keywords': [wrong],
-				'reply_messages': [u'%s*' % spelling_corrections[wrong]]
+				'reply_messages': [u'{0}*'.format(spelling_corrections[wrong])]
 			})
+
+	def timeline_update(self, data):
+		super().timeline_update(data)
