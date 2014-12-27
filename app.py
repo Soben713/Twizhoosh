@@ -4,8 +4,8 @@
 import os
 import time
 from twython import *
-from smart_handlers_manager import SmartHandlersManager
-from utils import log, debug
+from core.smart_handlers_manager import SmartHandlersManager
+from core.utils import log, debug
 
 CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
