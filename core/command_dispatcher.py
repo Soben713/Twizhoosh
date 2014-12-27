@@ -17,9 +17,10 @@ def load_command_parser_classes():
 
 
 class CommandDispatcher(base_handler.BaseHandler):
+	is_mentioned_regex = r'.*(tw*izho*u*sh|[ت|ط]ی[ظ|ز|ذ|ض][ه|ح]و*ش)\S* (?P<command>.*)'
+
 	def timeline_update(self, data):
-		is_mentioned_regex = r'.*(tw*izho*u*sh|[ت|ط]ی[ظ|ز|ذ|ض][ه|ح]و*ش)\S* (?P<command>.*)'
-		match = re.search(is_mentioned_regex, data['text'], re.IGNORECASE)
+		match = re.search(self.is_mentioned_regex, data['text'], re.IGNORECASE)
 		if match:
 			command = match.group('command')
 			parser_classes = load_command_parser_classes()
