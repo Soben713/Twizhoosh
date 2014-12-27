@@ -7,7 +7,7 @@ import random
 
 class ReplyByLearnedReplies(BaseHandler):
 	def timeline_update(self, data):
-		learned_replies = self.short_term_memory.get('learned_replies', {}).items()
+		learned_replies = list(self.short_term_memory.get('learned_replies', {}).items())
 		debug("Learned replies: {0}".format(learned_replies))
 		random.shuffle(learned_replies)
 

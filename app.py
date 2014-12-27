@@ -6,6 +6,7 @@ import time
 from twython import *
 from core.smart_handlers_manager import SmartHandlersManager
 from core.utils import log, debug
+from core import settings
 
 CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
@@ -25,13 +26,13 @@ class MyStreamer(TwythonStreamer):
 		'''
 		This is a dirty way to do it, I know. But what else can I do?
 		'''
-		if 'text' in data and 'user' in data and 'id_str' in data:
+		if 'text' in data and 'user' in data and 'id_str' in data and data['user']['screen_name']!=settings.TWIZHOOSH_USERNAME:
 			return True
 		return False
 
 	def on_success(self, data):
 		if self.is_a_tweet(data):
-			log("Timeline update: %s [%s]" % (data[u'user'][u'screen_name'], data[u'id_str']))
+			log("Timeline update: %s [%s]" % (data['user']['screen_name'], data['id_str']))
 			self.smart_handlers_manager.on_timeline_update(data)
 		else:
 			log("Got non status message: \n %s \n" % data)

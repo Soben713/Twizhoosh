@@ -1,5 +1,7 @@
 # TODO: Refactor the way modules are loaded. Since added some modules to core, had to delete HANDLERS_PACKAGE
 
+TWIZHOOSH_USERNAME = 'twizhoosh'
+
 # order is preserved
 INSTALLED_HANDLERS = [
 	"core.command_dispatcher.CommandDispatcher",
