@@ -1,5 +1,5 @@
 from core.command_parsers.base import base_command_parser
-from core.utils import debug
+from core.utils import debug, log
 import re
 
 class LearnToReply(base_command_parser.BaseCommandParser):
@@ -19,6 +19,8 @@ class LearnToReply(base_command_parser.BaseCommandParser):
 				'text': y,
 				'teaching_tweet': data,
 			})
+
+			log("learned_replies size: {0}".format(len(self.short_term_memory['learned_replies'])))
 
 			reply_message = 'چشم اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
 			self.reply_to(data, reply_message)
