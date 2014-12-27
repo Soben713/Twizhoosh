@@ -1,4 +1,4 @@
-from smart_handlers_manager import SmartHandlersManager
+from core.smart_handlers_manager import SmartHandlersManager
 
 class TestTwitter:
 	def update_status(self, *args, **kwargs):

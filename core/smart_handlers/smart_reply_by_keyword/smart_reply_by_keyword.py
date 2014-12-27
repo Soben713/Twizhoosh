@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from .base_handler import BaseHandler
+from core.smart_handlers.base.base_handler import BaseHandler
 from twython import *
 import re, random
-from utils import debug, log
+from core.utils import debug, log
 from abc import ABCMeta,abstractmethod
 
 class SmartReplyByKeyword(BaseHandler,metaclass=ABCMeta):

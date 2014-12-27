@@ -1,15 +1,15 @@
-from smart_handlers.base.base_handler import JustRepliedException
-from utils import debug
+from core.smart_handlers.base.base_handler import JustRepliedException
+from core.utils import debug
 import os.path
 import sys, pkgutil
 import inspect, importlib
-from settings import HANDLERS_PACKAGE,INSTALLED_HANDLERS
+from core.settings import INSTALLED_HANDLERS
 
-def load_handlers(root_package):
+def load_handlers():
 	handlers=[]
 	for handler in INSTALLED_HANDLERS:
 		(package_name,dot,class_name) = handler.rpartition('.')
-		module=importlib.import_module(root_package+dot+package_name)
+		module=importlib.import_module(package_name)
 		handlers.append(getattr(module,class_name))
 	return handlers
 
@@ -18,8 +18,9 @@ class SmartHandlersManager:
 	A timeline update dispatcher between Smart Handlers
 	'''
 	def __init__(self, twitter, *args, **kwargs):
-		handler_classes = load_handlers(HANDLERS_PACKAGE)
-		self.smart_handlers = [handler(twitter) for handler in handler_classes]
+		short_term_memory = {}
+		handler_classes = load_handlers()
+		self.smart_handlers = [handler(twitter, short_term_memory) for handler in handler_classes]
 
 	def on_timeline_update(self, data):
 		try:

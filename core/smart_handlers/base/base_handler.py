@@ -6,8 +6,9 @@ class JustRepliedException(Exception):
 		super(JustRepliedException, self).__init__(*args, **kwargs)
 
 class BaseHandler(object,metaclass=ABCMeta):
-	def __init__(self, twitter):
+	def __init__(self, twitter, short_term_memory):
 		self.twitter = twitter
+		self.short_term_memory = short_term_memory
 
 	@abstractmethod
 	def timeline_update(self, data):
