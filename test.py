@@ -5,6 +5,10 @@ class TestTwitter:
 		print('update status was called')
 		print('args: {0} \n kwargs: {1}'.format(args, kwargs))
 
+	def send_direct_message(self, *args, **kwargs):
+		print('direct message was called')
+		print('args: {0} \n kwargs: {1}'.format(args, kwargs))
+
 if __name__ == '__main__':
 	manager = SmartHandlersManager(twitter = TestTwitter())
 
@@ -16,5 +20,6 @@ if __name__ == '__main__':
 			'id_str': '123456789',
 			'user': {
 				'screen_name': 'test_user',
+				'id_str': '23487',
 			}
 		})

@@ -1,5 +1,6 @@
 from core.command_parsers.base import base_command_parser
 from core.utils import debug, log
+from core.smart_handlers.base.base_handler import JustRepliedException
 import re
 
 class LearnToReply(base_command_parser.BaseCommandParser):
@@ -22,5 +23,7 @@ class LearnToReply(base_command_parser.BaseCommandParser):
 
 			log("learned_replies size: {0}".format(len(self.short_term_memory['learned_replies'])))
 
-			reply_message = 'چشم اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
-			self.reply_to(data, reply_message)
+			reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
+
+			self.twitter.send_direct_message(text=reply_message, user=data['user']['id_str'])
+			raise JustRepliedException(tweet=reply_message)
