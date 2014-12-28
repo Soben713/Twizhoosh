@@ -7,6 +7,7 @@ from twython import *
 from core.smart_handlers_manager import SmartHandlersManager
 from core.utils import log, debug
 from core import settings
+from twython.exceptions import TwythonError, TwythonRateLimitError
 
 CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
@@ -15,6 +16,7 @@ OAUTH_TOKEN_SECRET = os.environ['TWITTER_OAUTH_TOKEN_SECRET']
 DEBUG = os.environ['DEBUG']
 TWEET_LENGTH = 140
 TWEET_URL_LENGTH = 21
+
 
 class MyStreamer(TwythonStreamer):
 	def __init__(self, *args, **kwargs):
@@ -41,16 +43,23 @@ class MyStreamer(TwythonStreamer):
 		log(status_code)
 		log(data)
 
+	def user(*args, **kwargs):
+		while True:
+			try:
+				super(MyStreamer, self).user(*args, **kwargs)
+			except TwythonRateLimitError as e:
+				log("Rate limit error, retrying after {0} seconds".format(e.retry_after))
+				time.sleep(e.retry_after)
+			except TwythonError as e:
+				log("Twython error {0}".format(e))
+
+
 def main():
-	while True:
-		log("starting")
-		try:
-			stream = MyStreamer(CONSUMER_KEY, CONSUMER_SECRET, 
+	log("starting")
+	stream = MyStreamer(CONSUMER_KEY, CONSUMER_SECRET, 
 				OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-			stream.user(replies="all")
-		except TwythonRateLimitError as e:
-			log("Rate limit error, retrying after {0} seconds".format(e.retry_after))
-			time.sleep(e.retry_after)
+	stream.user(replies="all")
+
 
 if __name__ == '__main__':
 	main()

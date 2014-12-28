@@ -14,6 +14,11 @@ class ReplyByLearnedReplies(BaseHandler):
 		for k, v in learned_replies:
 			if data['text'].find(k) > -1:
 				reply_item = random.choice(v)
-				reply_message = reply_item['text']
+				reply_message = None
+				teacher = reply_item['teaching_tweet']['user']['screen_name']
+				if teacher == data['user']['screen_name']:
+					reply_message = reply_item['text']
+				else:
+					reply_message = "@{0} {1}".format(teacher, reply_item['text'])
 				self.reply_to(data, reply_message)
 				return

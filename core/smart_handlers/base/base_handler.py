@@ -1,4 +1,6 @@
 from abc import ABCMeta,abstractmethod
+from twython.exceptions import TwythonError
+from core.utils import log
 
 class JustRepliedException(Exception):
 	def __init__(self, tweet, *args, **kwargs):
@@ -17,12 +19,14 @@ class BaseHandler(object,metaclass=ABCMeta):
 		'''
 		pass
 
-
 	def tweet(self, *args, **kwargs):
-		self.twitter.update_status(*args, **kwargs)
-		status = kwargs.get('status', '-> No status specified')
+		try:
+			self.twitter.update_status(*args, **kwargs)
+			status = kwargs.get('status', '-> No status specified')
+			raise JustRepliedException(tweet=status)
+		except TwythonError as e:
+			log("Twithon error: {0}".format(e))
 		# To ensure at most one handler replies, we throw an exception
-		raise JustRepliedException(tweet=status)
 
 	def reply_to(self, tweet_data, status, *args, **kwargs):
 		status = '@{0} {1}'.format(tweet_data['user']['screen_name'], status)
