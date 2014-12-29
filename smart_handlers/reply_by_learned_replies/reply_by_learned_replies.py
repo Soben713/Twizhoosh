@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from core.smart_handlers.base.base_handler import BaseHandler
-from core.utils import debug
+from core.utils.logging import debug
 import random
 
 class ReplyByLearnedReplies(BaseHandler):

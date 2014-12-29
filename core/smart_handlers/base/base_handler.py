@@ -1,6 +1,6 @@
 from abc import ABCMeta,abstractmethod
 from twython.exceptions import TwythonError
-from core.utils import log
+from core.utils.logging import log
 
 class JustRepliedException(Exception):
 	def __init__(self, tweet, *args, **kwargs):

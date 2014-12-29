@@ -5,7 +5,8 @@ import os
 import time
 from twython import *
 from core.smart_handlers_manager import SmartHandlersManager
-from core.utils import log, debug
+from core.utils.logging import log, debug
+from core.utils import farsi_tools
 from core import settings
 from twython.exceptions import TwythonError, TwythonRateLimitError
 

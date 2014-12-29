@@ -1,5 +1,6 @@
 from core.smart_handlers.base.base_handler import JustRepliedException
-from core.utils import debug
+from core.utils.logging import debug
+from core.utils import farsi_tools
 import os.path
 import sys, pkgutil
 import inspect, importlib
@@ -24,6 +25,7 @@ class SmartHandlersManager:
 
 	def on_timeline_update(self, data):
 		try:
+			data['text'] = farsi_tools.normalize(data['text'])
 			for smart_handler in self.smart_handlers:
 				smart_handler.timeline_update(data)
 		except JustRepliedException as e:

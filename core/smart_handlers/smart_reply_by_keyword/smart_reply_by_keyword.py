@@ -4,7 +4,7 @@
 from core.smart_handlers.base.base_handler import BaseHandler
 from twython import *
 import re, random
-from core.utils import debug, log
+from core.utils.logging import debug, log
 from abc import ABCMeta,abstractmethod
 
 class SmartReplyByKeyword(BaseHandler,metaclass=ABCMeta):

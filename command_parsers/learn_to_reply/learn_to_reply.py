@@ -1,5 +1,5 @@
 from core.command_parsers.base import base_command_parser
-from core.utils import debug, log
+from core.utils.logging import debug, log
 from core.smart_handlers.base.base_handler import JustRepliedException
 import re
 
