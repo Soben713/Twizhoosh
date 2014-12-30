@@ -76,3 +76,6 @@ Temporary Items
 #Sublime Projects
 *.sublime-project
 *.sublime-workspace
+
+#Pycharm
+*.idea
