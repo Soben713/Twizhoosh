@@ -1,3 +1,16 @@
+import os
+
+# Import deploying related keys
+CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
+OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
+OAUTH_TOKEN_SECRET = os.environ['TWITTER_OAUTH_TOKEN_SECRET']
+
+DEBUG = os.environ['DEBUG']
+
+TWEET_LENGTH = 140
+TWEET_URL_LENGTH = 21
+
 # TODO: Refactor the way modules are loaded. Since added some modules to
 # core, had to delete HANDLERS_PACKAGE
 

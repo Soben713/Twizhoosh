@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os
 import time
 
 from twython import *
@@ -12,20 +11,15 @@ from core.utils.logging import log
 from core import settings
 
 
-CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
-OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
-OAUTH_TOKEN_SECRET = os.environ['TWITTER_OAUTH_TOKEN_SECRET']
-DEBUG = os.environ['DEBUG']
-TWEET_LENGTH = 140
-TWEET_URL_LENGTH = 21
-
-
 class MyStreamer(TwythonStreamer):
     def __init__(self, *args, **kwargs):
         super(MyStreamer, self).__init__(*args, **kwargs)
         self.twitter = Twython(
-            CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+            settings.CONSUMER_KEY,
+            settings.CONSUMER_SECRET,
+            settings.OAUTH_TOKEN,
+            settings.OAUTH_TOKEN_SECRET
+        )
         self.smart_handlers_manager = SmartHandlersManager(self.twitter)
 
     def is_a_tweet(self, data):
@@ -52,7 +46,7 @@ class MyStreamer(TwythonStreamer):
     def user(self, *args, **kwargs):
         while True:
             try:
-                super(MyStreamer, self).user(*args, **kwargs)
+                super(MyStreamer, self).user(self, *args, **kwargs)
             except TwythonRateLimitError as e:
                 log("Rate limit error, retrying after {0} seconds".format(
                     e.retry_after))
@@ -63,8 +57,7 @@ class MyStreamer(TwythonStreamer):
 
 def main():
     log("starting")
-    stream = MyStreamer(CONSUMER_KEY, CONSUMER_SECRET,
-                        OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+    stream = MyStreamer()
     stream.user(replies="all")
 
 
