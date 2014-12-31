@@ -24,5 +24,6 @@ if __name__ == '__main__':
             'user': {
                 'screen_name': 'test_user',
                 'id_str': '23487',
+                'profile_image_url': 'http://example.com',
             }
         })

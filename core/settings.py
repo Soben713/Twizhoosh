@@ -1,12 +1,12 @@
 import os
 
 # Import deploying related keys
-CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
-OAUTH_TOKEN = os.environ['TWITTER_OAUTH_TOKEN']
-OAUTH_TOKEN_SECRET = os.environ['TWITTER_OAUTH_TOKEN_SECRET']
+CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', None)
+CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', None)
+OAUTH_TOKEN = os.environ.get('TWITTER_OAUTH_TOKEN', None)
+OAUTH_TOKEN_SECRET = os.environ.get('TWITTER_OAUTH_TOKEN_SECRET', None)
 
-DEBUG = os.environ['DEBUG']
+DEBUG = os.environ.get('DEBUG', True)
 
 TWEET_LENGTH = 140
 TWEET_URL_LENGTH = 21
@@ -26,4 +26,5 @@ INSTALLED_HANDLERS = [
 
 INSTALLED_COMMAND_PARSERS = [
     "command_parsers.learn_to_reply.learn_to_reply.LearnToReply",
+    "command_parsers.mustachify.mustachify.Mustachify",
 ]

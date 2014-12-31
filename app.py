@@ -13,7 +13,13 @@ from core import settings
 
 class MyStreamer(TwythonStreamer):
     def __init__(self, *args, **kwargs):
-        super(MyStreamer, self).__init__(*args, **kwargs)
+        super(MyStreamer, self).__init__(
+            settings.CONSUMER_KEY,
+            settings.CONSUMER_SECRET,
+            settings.OAUTH_TOKEN,
+            settings.OAUTH_TOKEN_SECRET,
+            *args, **kwargs
+        )
         self.twitter = Twython(
             settings.CONSUMER_KEY,
             settings.CONSUMER_SECRET,
