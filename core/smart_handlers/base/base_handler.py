@@ -12,15 +12,18 @@ class JustRepliedException(Exception):
 
 
 class BaseHandler(object, metaclass=ABCMeta):
-    def __init__(self, twitter, short_term_memory):
+    def __init__(self, twitter, st_memory_manager):
+        """
+        @type st_memory_manager: core.st_memory_manager.STMemoryManager
+        """
         self.twitter = twitter
-        self.short_term_memory = short_term_memory
+        self.st_memory_manager = st_memory_manager
 
     @abstractmethod
     def timeline_update(self, data):
-        '''
+        """
         Called when someone @Twizhoosh follows, tweets something
-        '''
+        """
         pass
 
     def tweet(self, *args, **kwargs):

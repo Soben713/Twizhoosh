@@ -1,4 +1,5 @@
 import importlib
+from core.st_memory_manager import STMemoryManager
 
 from core.smart_handlers.base.base_handler import JustRepliedException
 from core.utils.logging import debug
@@ -21,10 +22,10 @@ class SmartHandlersManager:
     '''
 
     def __init__(self, twitter, *args, **kwargs):
-        short_term_memory = {}
+        st_memory_manager = STMemoryManager()
         handler_classes = load_handlers()
         self.smart_handlers = [
-            handler(twitter, short_term_memory) for handler in handler_classes]
+            handler(twitter, st_memory_manager) for handler in handler_classes]
 
     def on_timeline_update(self, data):
         try:

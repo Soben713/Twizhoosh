@@ -30,7 +30,7 @@ class CommandDispatcher(base_handler.BaseHandler):
 
             for parser_class in parser_classes:
                 parsers.append(
-                    parser_class(self.twitter, self.short_term_memory))
+                    parser_class(self.twitter, self.st_memory_manager))
 
             for parser in parsers:
                 parser.command_update(command, data)

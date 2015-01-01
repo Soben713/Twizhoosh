@@ -13,13 +13,14 @@ class Mustachify(base_command_parser.BaseCommandParser):
 
     def command_update(self, command, data):
         match = re.search(self.command_pattern, command)
-        mustaches = self.short_term_memory.setdefault('mustache', [])
 
         if match:
             log("Asked for a mustache, by {0}".format(data['user']['screen_name']))
 
-            if not data['user']['id_str'] in mustaches:
-                mustaches.append(data['user']['id_str'])
+            if not self.st_memory_manager.is_person_marked('mustache', data):
+                # Mark them
+                self.st_memory_manager.mark_person('mustache', data)
+
                 avatar_url = data['user']['profile_image_url']
                 avatar_url = avatar_url.replace('_normal', '')
 
@@ -36,4 +37,4 @@ class Mustachify(base_command_parser.BaseCommandParser):
                 )
 
             else:
-                self.reply_to(data, 'بسته دیگه :)')
+                self.reply_to(data, ':)')

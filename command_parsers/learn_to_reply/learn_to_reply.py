@@ -19,13 +19,13 @@ class LearnToReply(base_command_parser.BaseCommandParser):
                     data, 'نمی‌تونم کلمه‌های کوچیکتر از ۵ حرف رو یاد بگیرم. :|')
                 return
 
-            self.short_term_memory.setdefault('learned_replies', {}).setdefault(x, []).append({
+            self.st_memory_manager.memory.setdefault('learned_replies', {}).setdefault(x, []).append({
                 'text': y,
                 'teaching_tweet': data,
             })
 
             log("learned_replies size: {0}".format(
-                len(self.short_term_memory['learned_replies'])))
+                len(self.st_memory_manager.memory['learned_replies'])))
             reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
             self.twitter.send_direct_message(
                 text=reply_message, user=data['user']['id_str'])
