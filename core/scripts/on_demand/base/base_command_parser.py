@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from ...smart_handlers.base import base_handler
+from core.scripts.timeline.base import base_handler
 
 
 class BaseCommandParser(base_handler.BaseHandler):

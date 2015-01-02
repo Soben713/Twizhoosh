@@ -1,4 +1,4 @@
-from core.smart_handlers_manager import SmartHandlersManager
+from core.timeline_scripts_manager import TimelineScriptsManager
 
 
 class TestTwitter:
@@ -19,7 +19,7 @@ class TestTwitter:
 
 
 if __name__ == '__main__':
-    manager = SmartHandlersManager(twitter=TestTwitter())
+    manager = TimelineScriptsManager(twitter=TestTwitter())
 
     while True:
         timeline_update = input(

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from core.smart_handlers.smart_reply_by_keyword import smart_reply_by_keyword
+from core.scripts.timeline.smart_reply_by_keyword import smart_reply_by_keyword
 
 
 class SayHi(smart_reply_by_keyword.SmartReplyByKeyword):

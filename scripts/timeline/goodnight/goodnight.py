@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from core.smart_handlers.smart_reply_by_keyword import smart_reply_by_keyword
-from core.utils.logging import log
-from .goodnight_responses import goodnight_responses
+from core.scripts.timeline.smart_reply_by_keyword import smart_reply_by_keyword
+from scripts.timeline.goodnight.goodnight_responses import goodnight_responses
 
 
 class GoodNight(smart_reply_by_keyword.SmartReplyByKeyword):

@@ -1,5 +1,5 @@
 from .spelling_corrections import spelling_corrections
-from core.smart_handlers.smart_reply_by_keyword import smart_reply_by_keyword
+from core.scripts.timeline.smart_reply_by_keyword import smart_reply_by_keyword
 
 
 class SpellChecker(smart_reply_by_keyword.SmartReplyByKeyword):

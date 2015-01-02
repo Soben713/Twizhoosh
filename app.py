@@ -6,7 +6,7 @@ import time
 from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
-from core.smart_handlers_manager import SmartHandlersManager
+from core.timeline_scripts_manager import TimelineScriptsManager
 from core.utils.logging import log
 from core import settings
 
@@ -26,7 +26,7 @@ class MyStreamer(TwythonStreamer):
             settings.OAUTH_TOKEN,
             settings.OAUTH_TOKEN_SECRET
         )
-        self.smart_handlers_manager = SmartHandlersManager(self.twitter)
+        self.smart_handlers_manager = TimelineScriptsManager(self.twitter)
 
     def is_a_tweet(self, data):
         '''

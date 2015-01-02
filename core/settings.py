@@ -17,16 +17,16 @@ TWEET_URL_LENGTH = 21
 TWIZHOOSH_USERNAME = 'twizhoosh'
 
 # order is preserved
-INSTALLED_HANDLERS = [
-    "core.command_dispatcher.CommandDispatcher",
+INSTALLED_TIMELINE_SCRIPTS = [
+    "core.on_demand_scripts_manager.OnDemandScriptsManager",
 
-    "smart_handlers.spell_checker.spell_checker.SpellChecker",
-    "smart_handlers.goodnight.goodnight.GoodNight",
-    "smart_handlers.reply_by_learned_replies.reply_by_learned_replies.ReplyByLearnedReplies",
-    # "smart_handlers.say_hi.say_hi.SayHi"
+    "scripts.timeline.spell_checker.spell_checker.SpellChecker",
+    "scripts.timeline.goodnight.goodnight.GoodNight",
+    "scripts.timeline.reply_by_learned_replies.reply_by_learned_replies.ReplyByLearnedReplies",
+    # "scripts.timeline.say_hi.say_hi.SayHi"
 ]
 
-INSTALLED_COMMAND_PARSERS = [
-    "command_parsers.learn_to_reply.learn_to_reply.LearnToReply",
-    "command_parsers.mustachify.mustachify.Mustachify",
+INSTALLED_ON_DEMAND_SCRIPTS = [
+    "scripts.on_demand.learn_to_reply.learn_to_reply.LearnToReply",
+    "scripts.on_demand.mustachify.mustachify.Mustachify",
 ]

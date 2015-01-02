@@ -1,8 +1,8 @@
 import re
 
-from core.command_parsers.base import base_command_parser
+from core.scripts.on_demand.base import base_command_parser
 from core.utils.logging import log
-from core.smart_handlers.base.base_handler import JustRepliedException
+from core.scripts.timeline.base.base_handler import JustRepliedException
 
 
 class LearnToReply(base_command_parser.BaseCommandParser):

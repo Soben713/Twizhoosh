@@ -4,7 +4,7 @@ from io import BytesIO
 
 import requests
 
-from core.command_parsers.base import base_command_parser
+from core.scripts.on_demand.base import base_command_parser
 from core.utils.logging import log
 
 

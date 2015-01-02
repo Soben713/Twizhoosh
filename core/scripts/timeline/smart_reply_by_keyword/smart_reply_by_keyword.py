@@ -7,7 +7,7 @@ from abc import ABCMeta, abstractmethod
 
 from twython import *
 
-from core.smart_handlers.base.base_handler import BaseHandler
+from core.scripts.timeline.base.base_handler import BaseHandler
 from core.utils.logging import log
 
 
