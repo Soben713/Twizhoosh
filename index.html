@@ -31,7 +31,11 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p><a href="https://twitter.com/twizhoosh">@Twizhoosh</a> is a smart Persian twitter-bot, written in Python and aimed to be easily readable and contributable.</p>
+        <h1>
+<a id="twizhoosh" class="anchor" href="#twizhoosh" aria-hidden="true"><span class="octicon octicon-link"></span></a>Twizhoosh</h1>
+
+<p><a href="https://twitter.com/twizhoosh">@Twizhoosh</a> is a smart Persian twitter-bot, written in Python and aimed to be easily
+readable and contributable.</p>
 
 <h2>
 <a id="know-him-better" class="anchor" href="#know-him-better" aria-hidden="true"><span class="octicon octicon-link"></span></a>Know Him Better</h2>
@@ -40,41 +44,53 @@
 <li>Twizhoosh does not talk too much and will not bother people who follow him.</li>
 <li>He does not reply to a tweet more than once.</li>
 <li>He never replies to people he is not following.</li>
-<li>He does not have any memory.</li>
-<li>He would not be rude to anyone, unless it is neccessary.</li>
+<li>He does not have any long term memory.</li>
+<li>He would not be rude to anyone, unless it is necessary.</li>
 <li>He is smart.</li>
 </ul>
 
 <h2>
 <a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Contribute</h2>
 
-<p>Are you willing to contribute to Twizhoosh? Great. If you only need to edit a file (e.g. adding a spelling correction entry) you may just browse the file on Github and click on the edit icon. Github will do the rest for you. But if you are trying to implement a feature for Twizhoosh (called a smart handler) you should:</p>
+<p>Are you willing to contribute to Twizhoosh? Great. If you only need to edit a file (e.g. adding a spelling
+correction entry) you may just browse the file on Github and click on the edit icon. Github will do the rest
+for you. But if you are trying to implement a script for Twizhoosh you should:</p>
 
 <ol>
 <li>Fork Twizhoosh.</li>
-<li>Create your feature branch: <code>git checkout -b my-new-feature</code>
+<li>Create your feature branch: <code>git checkout -b my-new-script</code>
 </li>
 <li>Implement your feature.</li>
-<li>Commit your changes: <code>git commit -am 'Add some feature'</code>
+<li>Commit your changes: <code>git commit -am 'Add some script'</code>
 </li>
-<li>Push to the branch: <code>git push origin my-new-feature</code>
+<li>Push to the branch: <code>git push origin my-new-script</code>
 </li>
 <li>Submit a pull request.</li>
 </ol>
 
 <h2>
-<a id="implementing-a-feature" class="anchor" href="#implementing-a-feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementing a Feature</h2>
+<a id="implementing-a-script" class="anchor" href="#implementing-a-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementing a Script</h2>
 
-<p>Features like spelling correction, etc are called smart handlers. When someone Twizhoosh follows, tweets. The tweet is passed to smart handlers in the order specified in <code>smart_handlers_list.py</code>. The process ends as soon as a smart handler replies or the list ends.</p>
+<p>There are three types of scripts:</p>
 
-<p>For adding a smart handler, create a python package in <code>smart_handlers</code> with name of your feature. Create a python file in your package that contains a subclass of <code>BaseHandler</code> (which is implemented in <code>smart_handlers/base/base_handler.py</code>). This is the class you will implement your feature in. You may want to override the <code>timeline_update</code> method, which the new timeline tweet is passed to. For more information, I suggest you to take a look at the current smart handlers.</p>
+<ol>
+<li>Timeline scripts: Called on any timeline update.</li>
+<li>On demand scripts: Called when twizhoosh is demanded.</li>
+<li>Stand-alone scripts: Called repeatedly (not implemented yet).</li>
+</ol>
 
-<p>After you finished implementing your smart handler, add it to <code>smart_handlers_list.py</code>.</p>
+<p>You can take a look at current scripts in <code>scripts</code> folder. Do not forget to add your scripts to <code>settings.py</code> after
+implementing.</p>
 
 <h2>
 <a id="testing" class="anchor" href="#testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testing</h2>
 
 <p>Before submitting a pull request, test your feature. You can do it by running <code>test.py</code> and simulating the timeline.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>You need <code>Python 3.4</code> or later and <code>twython 3.2</code> to run the code.</p>
       </section>
     </div>
 
