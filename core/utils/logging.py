@@ -1,4 +1,5 @@
 import os
+from core import settings
 
 
 def log(text):
@@ -6,6 +7,5 @@ def log(text):
 
 
 def debug(text):
-    DEBUG = int(os.environ.get('DEBUG', 1))
-    if DEBUG:
+    if settings.DEBUG:
         log(text)
