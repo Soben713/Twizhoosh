@@ -8,7 +8,7 @@ from core.utils.logging import log
 
 class NobodyCares(BaseTimelineScript):
     def timeline_update(self, data):
-        do_reply = (random.randint(0, 500) == 0)
+        do_reply = (random.randint(0, 100) == 0)
         if not do_reply or not 'text' in data or data.get('in_reply_to_status_id_str', None):
             return
 
