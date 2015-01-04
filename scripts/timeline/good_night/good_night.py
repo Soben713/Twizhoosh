@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from core.scripts.timeline.smart_reply_by_keyword import smart_reply_by_keyword
-from scripts.timeline.goodnight.goodnight_responses import goodnight_responses
+from core.scripts.timeline import reply_by_keyword_base
+from scripts.timeline.good_night.good_night_responses import goodnight_responses
 
 
-class GoodNight(smart_reply_by_keyword.SmartReplyByKeyword):
+class GoodNight(reply_by_keyword_base.BaseReplyByKeywordScript):
     replies = [{
                    'keywords': [r'^(#)?شب(تون)?(\s|‌)*(بخیر|به خیر|به‌خیر|خوش)(.)?$'],
                    'reply_messages': goodnight_responses

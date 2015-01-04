@@ -7,16 +7,16 @@ from abc import ABCMeta, abstractmethod
 
 from twython import *
 
-from core.scripts.timeline.base.base_handler import BaseHandler
+from core.scripts.timeline.base import BaseTimelineScript
 from core.utils.logging import log
 
 
-class SmartReplyByKeyword(BaseHandler, metaclass=ABCMeta):
-    '''
+class BaseReplyByKeywordScript(BaseTimelineScript, metaclass=ABCMeta):
+    """
     @replies contains a list of keywords and reply messages, If a tweet
     in timeline contains one of the keywords, @Twizhoosh replies with
     something random from its reply_messages
-    '''
+    """
 
     replies = []
 
@@ -25,7 +25,7 @@ class SmartReplyByKeyword(BaseHandler, metaclass=ABCMeta):
 
     @abstractmethod
     def timeline_update(self, data):
-        marked = self.st_memory_manager.is_person_marked(self.__class__.__name__, data)
+        marked = self.st_memory.is_person_marked(self.__class__.__name__, data)
 
         if not self.answer_once or not marked:
             for i in range(len(self.replies)):
@@ -35,8 +35,8 @@ class SmartReplyByKeyword(BaseHandler, metaclass=ABCMeta):
                         log('matched')
                         try:
                             if self.answer_once:
-                                self.st_memory_manager.mark_person(self.__class__.__name__, data)
-                            self.reply_to(
+                                self.st_memory.mark_person(self.__class__.__name__, data)
+                            self.twitter.reply_to(
                                 data, random.choice(reply['reply_messages']))
                         except TwythonError as e:
                             print(e)

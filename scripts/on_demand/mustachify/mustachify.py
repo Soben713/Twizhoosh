@@ -4,11 +4,11 @@ from io import BytesIO
 
 import requests
 
-from core.scripts.on_demand.base import base_command_parser
+from core.scripts.on_demand import base
 from core.utils.logging import log
 
 
-class Mustachify(base_command_parser.BaseCommandParser):
+class Mustachify(base.BaseOnDemandScript):
     command_pattern = '.*س(ی)?بیل.*'
 
     def command_update(self, command, data):
@@ -17,9 +17,9 @@ class Mustachify(base_command_parser.BaseCommandParser):
         if match:
             log("Asked for a mustache, by {0}".format(data['user']['screen_name']))
 
-            if not self.st_memory_manager.is_person_marked('mustache', data):
+            if not self.st_memory.is_person_marked('mustache', data):
                 # Mark them
-                self.st_memory_manager.mark_person('mustache', data)
+                self.st_memory.mark_person('mustache', data)
 
                 avatar_url = data['user']['profile_image_url']
                 avatar_url = avatar_url.replace('_normal', '')
@@ -30,11 +30,11 @@ class Mustachify(base_command_parser.BaseCommandParser):
 
                 img = requests.get(url=img_url).content
 
-                self.twitter.update_status_with_media(
+                self.twitter.twitter.update_status_with_media(
                     status='@' + data['user']['screen_name'],
                     media=BytesIO(img),
                     in_reply_to_status_id=data['id_str']
                 )
 
             else:
-                self.reply_to(data, ':)')
+                self.twitter.reply_to(data, ':)')

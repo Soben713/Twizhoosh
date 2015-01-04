@@ -36,7 +36,7 @@ You can take a look at current scripts in `scripts` folder. Do not forget to add
 implementing.
 
 ## Testing
-Before submitting a pull request, test your feature. You can do it by running `test.py` and simulating the timeline.
+Before submitting a pull request, test your feature. You can do it by running `app.py` and simulating the timeline.
 
 ## Requirements
 You need `Python 3.4` or later and `twython 3.2` to run the code.

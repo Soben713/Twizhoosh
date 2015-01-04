@@ -3,14 +3,14 @@
 
 import random
 
-from core.scripts.timeline.base.base_handler import BaseHandler
+from core.scripts.timeline.base import BaseTimelineScript
 from core.utils.logging import debug
 
 
-class ReplyByLearnedReplies(BaseHandler):
+class ReplyByLearnedReplies(BaseTimelineScript):
     def timeline_update(self, data):
         learned_replies = list(
-            self.st_memory_manager.memory.get('learned_replies', {}).items())
+            self.st_memory.memory.get('learned_replies', {}).items())
         debug("Learned replies: {0}".format(learned_replies))
         random.shuffle(learned_replies)
 
@@ -24,5 +24,5 @@ class ReplyByLearnedReplies(BaseHandler):
                 else:
                     reply_message = "@{0} {1}".format(
                         teacher, reply_item['text'])
-                self.reply_to(data, reply_message)
+                self.twitter.reply_to(data, reply_message)
                 return

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from core.scripts.timeline.smart_reply_by_keyword import smart_reply_by_keyword
+from core.scripts.timeline import reply_by_keyword_base
 
 
-class SayHi(smart_reply_by_keyword.SmartReplyByKeyword):
+class SayHi(reply_by_keyword_base.BaseReplyByKeywordScript):
     replies = [{
                    'keywords': ['تیزهوش', 'تویزهوش', 'tizho*u*sh', '(?<!@)tw*izho*u*sh'],
                    'reply_messages': [

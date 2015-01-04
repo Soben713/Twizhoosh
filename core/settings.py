@@ -10,23 +10,23 @@ DEBUG = os.environ.get('DEBUG', True)
 
 TWEET_LENGTH = 140
 TWEET_URL_LENGTH = 21
-
-# TODO: Refactor the way modules are loaded. Since added some modules to
-# core, had to delete HANDLERS_PACKAGE
-
 TWIZHOOSH_USERNAME = 'twizhoosh'
+
 
 # order is preserved
 INSTALLED_TIMELINE_SCRIPTS = [
-    "core.on_demand_scripts_manager.OnDemandScriptsManager",
-
-    "scripts.timeline.spell_checker.spell_checker.SpellChecker",
-    "scripts.timeline.goodnight.goodnight.GoodNight",
-    "scripts.timeline.reply_by_learned_replies.reply_by_learned_replies.ReplyByLearnedReplies",
-    # "scripts.timeline.say_hi.say_hi.SayHi"
+    "spell_checker",
+    "good_night",
+    "reply_by_learned_replies",
 ]
 
 INSTALLED_ON_DEMAND_SCRIPTS = [
-    "scripts.on_demand.learn_to_reply.learn_to_reply.LearnToReply",
-    "scripts.on_demand.mustachify.mustachify.Mustachify",
+    "learn_to_reply",
+    "mustachify",
 ]
+
+INSTALLED_STANDALONE_SCRIPTS = [
+    "call_sherrgoo",
+]
+# Stand-Alone repeat time (seconds)
+STAND_ALONE_REPEAT_TIME = 1
