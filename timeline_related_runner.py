@@ -7,6 +7,7 @@ from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
 from core.timeline_scripts_manager import TimelineScriptsManager
+from core.utils import sample_tweet
 from core.utils.logging import log
 from core import settings
 
@@ -67,13 +68,6 @@ def run():
         while True:
             timeline_update = input(
                 "Specify a sample timeline update message to see what @Twizhoosh does\n")
-            timeline_scripts_manager.on_timeline_update({
-                'text': timeline_update,
-                'id': 123456789,
-                'id_str': '123456789',
-                'user': {
-                    'screen_name': 'test_user',
-                    'id_str': '23487',
-                    'profile_image_url': 'http://example.com',
-                }
-            })
+            tweet_data = sample_tweet.data
+            tweet_data['text'] = timeline_update
+            timeline_scripts_manager.on_timeline_update(tweet_data)

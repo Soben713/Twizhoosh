@@ -1,15 +1,17 @@
 import os
 import random
-from io import BytesIO
+
 from twython.exceptions import TwythonError
+
 from core.scripts.timeline.base import BaseTimelineScript
 from core.utils.logging import log
 
 
 class NobodyCares(BaseTimelineScript):
     def timeline_update(self, data):
-        do_reply = (random.randint(0, 100) == 0)
-        if not do_reply or not 'text' in data or data.get('in_reply_to_status_id_str', None):
+        do_reply = (random.randint(0, 300) == 0)
+        if not do_reply or data.get('in_reply_to_status_id_str', None) or data['entities']['user_mentions'] or len(
+                data['text'])==0:
             return
 
         log('Ok...sending nobody cares')
