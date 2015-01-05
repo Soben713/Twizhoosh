@@ -1,3 +1,4 @@
+from core.exceptions import DontReplyAnymore
 from core.on_demand_scripts_manager import OnDemandScriptsManager
 from core.script_loader import load_scripts
 
@@ -18,5 +19,8 @@ class TimelineScriptsManager:
 
     def on_timeline_update(self, data):
         data['text'] = farsi_tools.normalize(data['text'])
-        for script in self.scripts:
-            script.timeline_update(data)
+        try:
+            for script in self.scripts:
+                script.timeline_update(data)
+        except DontReplyAnymore:
+            pass

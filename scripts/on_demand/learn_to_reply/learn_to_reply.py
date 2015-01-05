@@ -1,11 +1,12 @@
 import re
+from core.exceptions import DontReplyAnymore
 
 from core.scripts.on_demand import base
 from core.utils.logging import log
 
 
 class LearnToReply(base.BaseOnDemandScript):
-    command_pattern = 'اگ(ر|ه) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
+    command_pattern = r'اگ(ر|ه) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
 
     def command_update(self, command, data):
         match = re.search(self.command_pattern, command)
@@ -28,3 +29,5 @@ class LearnToReply(base.BaseOnDemandScript):
             reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
             self.twitter.twitter.send_direct_message(
                 text=reply_message, user=data['user']['id_str'])
+
+            raise DontReplyAnymore
