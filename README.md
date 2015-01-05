@@ -30,7 +30,7 @@ There are three types of scripts:
 
 1. Timeline scripts: Called on any timeline update.
 2. On demand scripts: Called when twizhoosh is demanded.
-3. Stand-alone scripts: Called repeatedly (not implemented yet).
+3. Stand-alone scripts: Called repeatedly.
 
 You can take a look at current scripts in `scripts` folder. Do not forget to add your scripts to `core/settings.py` after
 implementing.
