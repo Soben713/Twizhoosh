@@ -19,6 +19,8 @@ def cons_numbers(x):
 
 
 class DedicateRoundTweets(BaseStandaloneScript):
+    repeat_time = 10
+
     regex_patterns = [
         r'^[0-9]+00$',  # Numbers that end with 00
         r'^([0-9])\1+$',  # Numbers that are all equal
@@ -31,6 +33,7 @@ class DedicateRoundTweets(BaseStandaloneScript):
     def get_tweets_count(self):
         if settings.DEBUG:
             return random.randint(0, 10000)
+        log("Getting tweets")
         data = self.twitter.twitter.show_user(screen_name=settings.TWIZHOOSH_USERNAME)
         return data['statuses_count']
 
@@ -56,7 +59,9 @@ class DedicateRoundTweets(BaseStandaloneScript):
 
     def on_called(self):
         tweets = self.get_tweets_count()
+        log("welp")
         log("Number of tweets: " + str(tweets))
+        print(self.twitter.twitter.get_lastfunction_header('x-rate-limit-remaining'))
 
         if self.is_round(tweets + 1):
             log("Next tweet is round")

@@ -36,7 +36,6 @@ class BaseReplyByKeywordScript(BaseTimelineScript, metaclass=ABCMeta):
                         try:
                             if self.answer_once:
                                 self.st_memory.mark_person(self.__class__.__name__, data)
-                            self.twitter.reply_to(
-                                data, random.choice(reply['reply_messages']))
+                            self.twitter.reply_to(data, random.choice(reply['reply_messages']))
                         except TwythonError as e:
                             print(e)

@@ -30,5 +30,5 @@ INSTALLED_STANDALONE_SCRIPTS = [
     "call_sherrgoo",
     "dedicate_round_tweets",
 ]
-# Stand-Alone repeat time (seconds)
-STAND_ALONE_REPEAT_TIME = 1
+# Stand-Alone repeat time chunks in seconds, every script may override number of chunks
+STAND_ALONE_REPEAT_TIME_CHUNKS = 1

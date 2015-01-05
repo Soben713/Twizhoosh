@@ -1,3 +1,4 @@
+import random
 from twython.api import Twython
 from twython.exceptions import TwythonError
 
@@ -47,5 +48,4 @@ class TwitterSingleton():
 
     def reply_to(self, tweet_data, status, *args, **kwargs):
         status = '@{0} {1}'.format(tweet_data['user']['screen_name'], status)
-        self.tweet(
-            status=status, in_reply_to_status_id=tweet_data['id_str'], *args, **kwargs)
+        self.tweet(status=status, in_reply_to_status_id=tweet_data['id_str'], *args, **kwargs)

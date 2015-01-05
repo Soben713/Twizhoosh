@@ -1,5 +1,6 @@
 import random
 from core.scripts.standalone.tweet_per_day_base import TweetPerDayBase
+from core.utils.logging import log
 
 
 class CallSherrgoo(TweetPerDayBase):
@@ -15,3 +16,6 @@ class CallSherrgoo(TweetPerDayBase):
             'شرگو...',
         ]
         self.twitter.tweet(status=random.choice(calls))
+
+    def on_called(self):
+        super(CallSherrgoo, self).on_called()

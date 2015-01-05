@@ -16,8 +16,8 @@ class TweetPerDayBase(BaseStandaloneScript):
         pass
 
     def on_called(self):
-        SECONDS_PER_DAY = 24 * 60 * 60
-        num_of_calls = SECONDS_PER_DAY / settings.STAND_ALONE_REPEAT_TIME
+        seconds_per_day = 24 * 60 * 60
+        num_of_calls = seconds_per_day / (settings.STAND_ALONE_REPEAT_TIME_CHUNKS * self.repeat_time)
 
         if randint(0, num_of_calls) < self.expected_tweet_per_day:
             self.update()

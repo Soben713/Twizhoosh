@@ -49,9 +49,8 @@ class MyStreamer(TwythonStreamer):
             try:
                 super(MyStreamer, self).user(self, *args, **kwargs)
             except TwythonRateLimitError as e:
-                log("Rate limit error, retrying after {0} seconds".format(
-                    e.retry_after))
-                time.sleep(e.retry_after)
+                log("Rate limit error, asks to retry after {0}".format(e.retry_after))
+                time.sleep(min(int(e.retry_after), 5))
             except TwythonError as e:
                 log("Twython error {0}".format(e))
 

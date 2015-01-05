@@ -18,5 +18,5 @@ class Standalone(threading.Thread):
 if __name__ == '__main__':
     t = TimelineRelated()
     s = Standalone()
-    t.start()
+    # t.start()
     s.start()
