@@ -34,7 +34,7 @@ class DedicateRoundTweets(BaseStandaloneScript):
         if settings.DEBUG:
             return random.randint(0, 10000)
         log("Getting tweets")
-        data = self.twitter.twitter.show_user(screen_name=settings.TWIZHOOSH_USERNAME)
+        data = self.twitter.twitter.verify_credentials()
         return data['statuses_count']
 
     def is_round(self, num):
