@@ -1,4 +1,5 @@
 from time import sleep
+from twython.exceptions import TwythonError
 from core.script_loader import load_scripts
 from core.settings import STAND_ALONE_REPEAT_TIME, INSTALLED_STANDALONE_SCRIPTS
 from core.utils.logging import log
@@ -12,5 +13,9 @@ def run():
     while True:
         sleep(STAND_ALONE_REPEAT_TIME)
 
-        for script in scripts:
-            script.on_called()
+        try:
+            for script in scripts:
+                script.on_called()
+        except TwythonError as e:
+            log("Twython error: {0}".format(e))
+            pass

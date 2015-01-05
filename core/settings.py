@@ -28,6 +28,7 @@ INSTALLED_ON_DEMAND_SCRIPTS = [
 
 INSTALLED_STANDALONE_SCRIPTS = [
     "call_sherrgoo",
+    "dedicate_round_tweets",
 ]
 # Stand-Alone repeat time (seconds)
 STAND_ALONE_REPEAT_TIME = 1
