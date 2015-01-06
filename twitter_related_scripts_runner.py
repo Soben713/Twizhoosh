@@ -93,4 +93,4 @@ def run():
         stream.user(replies="all")
     else:
         # TODO: implement testing mode
-        log("Testing mode...")
+        log("Twitter related scripts testing mode is not ready...")
