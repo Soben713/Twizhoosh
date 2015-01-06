@@ -46,9 +46,3 @@ class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTi
             reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
             self.twitter.send_direct_message(
                 text=reply_message, user=teacher_id)
-
-    def update(self, data, data_type):
-        if data_type == base.BaseTimelineScript.listen_to:
-            on_demand.BaseOnTimelineDemandScript.update(self, data, data_type)
-        else:
-            on_demand.BaseOnDirectMessageDemandScript.update(self, data, data_type)

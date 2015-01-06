@@ -23,7 +23,7 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
     # If True, responds only once until short memory is cleaned
     answer_once = False
 
-    def timeline_update(self, data):
+    def on_timeline_update(self, data):
         marked = self.st_memory.is_person_marked(self.__class__.__name__, data)
 
         if not self.answer_once or not marked:

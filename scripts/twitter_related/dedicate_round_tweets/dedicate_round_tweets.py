@@ -48,7 +48,7 @@ class DedicateRoundTweets(base.BaseOnSelfStatusUpdate):
             dedicated_to = 'tester'
         return dedicated_to
 
-    def self_status_update(self, data):
+    def on_self_status_update(self, data):
         tweets = data['user']['statuses_count']
         log("Number of tweets: " + str(tweets))
 

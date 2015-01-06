@@ -67,7 +67,7 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
         for script in self.scripts.setdefault(data_type, []):
             log("Data type: {1} script found: {0}".format(script.__class__.__name__, data_type))
             try:
-                script.update(data, data_type)
+                getattr(script, 'on_' + data_type)(data)
             except TwythonError as e:
                 log("Twython error when occured when running script {0}\nError is:{1}".format(
                     script.__class__.__name__, e))

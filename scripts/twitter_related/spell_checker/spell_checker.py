@@ -13,6 +13,3 @@ class SpellChecker(reply_by_keyword_base.BaseReplyByKeywordScript):
                 'keywords': [wrong],
                 'reply_messages': [u'{0}*'.format(spelling_corrections[wrong])]
             })
-
-    def timeline_update(self, data):
-        super().timeline_update(data)

@@ -9,7 +9,7 @@ from core.utils.logging import debug
 
 
 class ReplyByLearnedReplies(base.BaseTimelineScript):
-    def timeline_update(self, data):
+    def on_timeline_update(self, data):
         learned_replies = list(
             self.st_memory.memory.get('learned_replies', {}).items())
         debug("Learned replies: {0}".format(learned_replies))

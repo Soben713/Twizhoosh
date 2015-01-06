@@ -11,6 +11,3 @@ class GoodNight(reply_by_keyword_base.BaseReplyByKeywordScript):
                    'reply_messages': goodnight_responses
                }]
     answer_once = True
-
-    def timeline_update(self, data):
-        super(GoodNight, self).timeline_update(data)
