@@ -3,18 +3,18 @@
 
 import re
 import random
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 
 from twython import *
 
-from core.scripts.timeline.base import BaseTimelineScript
+from core.scripts.twitter_related.base import BaseTimelineScript
 from core.utils.logging import log
 
 
-class BaseReplyByKeywordScript(BaseTimelineScript, metaclass=ABCMeta):
+class BaseReplyByKeywordScript(BaseTimelineScript):
     """
     @replies contains a list of keywords and reply messages, If a tweet
-    in timeline contains one of the keywords, @Twizhoosh replies with
+    in twitter_related contains one of the keywords, @Twizhoosh replies with
     something random from its reply_messages
     """
 
@@ -23,7 +23,6 @@ class BaseReplyByKeywordScript(BaseTimelineScript, metaclass=ABCMeta):
     # If True, responds only once until short memory is cleaned
     answer_once = False
 
-    @abstractmethod
     def timeline_update(self, data):
         marked = self.st_memory.is_person_marked(self.__class__.__name__, data)
 

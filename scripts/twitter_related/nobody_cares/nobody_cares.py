@@ -3,15 +3,15 @@ import random
 
 from twython.exceptions import TwythonError
 
-from core.scripts.timeline.base import BaseTimelineScript
+from core.scripts.twitter_related import base
 from core.utils.logging import log
 
 
-class NobodyCares(BaseTimelineScript):
+class NobodyCares(base.BaseTimelineScript):
     def timeline_update(self, data):
         do_reply = (random.randint(0, 300) == 0)
         if not do_reply or data.get('in_reply_to_status_id_str', None) or data['entities']['user_mentions'] or len(
-                data['text'])==0:
+                data['text']) == 0:
             return
 
         log('Ok...sending nobody cares')
@@ -24,7 +24,7 @@ class NobodyCares(BaseTimelineScript):
         log('Photo found')
 
         try:
-            self.twitter.twitter.update_status_with_media(
+            self.twitter.update_status_with_media(
                 status='@' + data['user']['screen_name'],
                 media=photo,
                 in_reply_to_status_id=data['id_str']

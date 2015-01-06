@@ -1,23 +1,21 @@
 import threading
-import urllib
-from core.utils.logging import debug
 
 import standalone_runner
-import timeline_related_runner
+import twitter_related_scripts_runner
 
 
-class TimelineRelated(threading.Thread):
+class TwitterRelatedScripts(threading.Thread):
     def run(self):
-        timeline_related_runner.run()
+        twitter_related_scripts_runner.run()
 
 
-class Standalone(threading.Thread):
+class StandaloneScripts(threading.Thread):
     def run(self):
         standalone_runner.run()
 
 
 if __name__ == '__main__':
-    t = TimelineRelated()
-    s = Standalone()
+    t = TwitterRelatedScripts()
+    s = StandaloneScripts()
     t.start()
-    s.start()
+    # s.start()

@@ -3,15 +3,15 @@ import urllib
 from io import BytesIO
 
 import requests
+from core.scripts.twitter_related import base
 
-from core.scripts.on_demand import base
 from core.utils.logging import log
 
 
-class Mustachify(base.BaseOnDemandScript):
+class Mustachify(base.BaseOnDemandedScript):
     command_pattern = '.*س(ی)?بیل.*'
 
-    def command_update(self, command, data):
+    def received_command(self, command, data):
         match = re.search(self.command_pattern, command)
 
         if match:
@@ -30,7 +30,7 @@ class Mustachify(base.BaseOnDemandScript):
 
                 img = requests.get(url=img_url).content
 
-                self.twitter.twitter.update_status_with_media(
+                self.twitter.update_status_with_media(
                     status='@' + data['user']['screen_name'],
                     media=BytesIO(img),
                     in_reply_to_status_id=data['id_str']

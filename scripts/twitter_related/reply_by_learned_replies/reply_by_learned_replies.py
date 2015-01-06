@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import random
+from core.scripts.twitter_related import base
 
-from core.scripts.timeline.base import BaseTimelineScript
+from core.scripts.twitter_related.base import BaseTwitterRelatedScript
 from core.utils.logging import debug
 
 
-class ReplyByLearnedReplies(BaseTimelineScript):
+class ReplyByLearnedReplies(base.BaseTimelineScript):
     def timeline_update(self, data):
         learned_replies = list(
             self.st_memory.memory.get('learned_replies', {}).items())
@@ -17,7 +18,6 @@ class ReplyByLearnedReplies(BaseTimelineScript):
         for k, v in learned_replies:
             if data['text'].find(k) > -1:
                 reply_item = random.choice(v)
-                reply_message = None
                 teacher = reply_item['teaching_tweet']['user']['screen_name']
                 if teacher == data['user']['screen_name']:
                     reply_message = reply_item['text']

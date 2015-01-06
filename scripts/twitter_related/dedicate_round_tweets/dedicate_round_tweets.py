@@ -2,12 +2,12 @@ import random
 import re
 
 from core import settings
-from core.scripts.standalone.base import BaseStandaloneScript
+from core.scripts.twitter_related import base
 from core.utils.logging import log
 
 
 def cons_numbers(x):
-    if len(x) < 2:
+    if len(x) < 4:
         return False
 
     inc_or_dec = 1 if x[1] > x[0] else -1
@@ -18,9 +18,7 @@ def cons_numbers(x):
     return True
 
 
-class DedicateRoundTweets(BaseStandaloneScript):
-    repeat_time = 10
-
+class DedicateRoundTweets(base.BaseOnSelfStatusUpdate):
     regex_patterns = [
         r'^[0-9]+00$',  # Numbers that end with 00
         r'^([0-9])\1+$',  # Numbers that are all equal
@@ -29,13 +27,6 @@ class DedicateRoundTweets(BaseStandaloneScript):
     function_patterns = [
         cons_numbers,  # Consecutive numbers, like 2345 or 8765
     ]
-
-    def get_tweets_count(self):
-        if settings.DEBUG:
-            return random.randint(0, 10000)
-        log("Getting tweets")
-        data = self.twitter.twitter.verify_credentials()
-        return data['statuses_count']
 
     def is_round(self, num):
         if len(str(num)) < 3:
@@ -57,11 +48,9 @@ class DedicateRoundTweets(BaseStandaloneScript):
             dedicated_to = 'tester'
         return dedicated_to
 
-    def on_called(self):
-        tweets = self.get_tweets_count()
-        log("welp")
+    def self_status_update(self, data):
+        tweets = data['user']['statuses_count']
         log("Number of tweets: " + str(tweets))
-        print(self.twitter.twitter.get_lastfunction_header('x-rate-limit-remaining'))
 
         if self.is_round(tweets + 1):
             log("Next tweet is round")

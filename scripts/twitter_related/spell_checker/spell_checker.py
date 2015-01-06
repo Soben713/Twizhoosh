@@ -1,5 +1,5 @@
 from .spelling_corrections import spelling_corrections
-from core.scripts.timeline import reply_by_keyword_base
+from core.scripts.twitter_related import reply_by_keyword_base
 
 
 class SpellChecker(reply_by_keyword_base.BaseReplyByKeywordScript):

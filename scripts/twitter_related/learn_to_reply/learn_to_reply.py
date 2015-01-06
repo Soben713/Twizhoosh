@@ -1,14 +1,13 @@
 import re
 from core.exceptions import DontReplyAnymore
-
-from core.scripts.on_demand import base
+from core.scripts.twitter_related import base
 from core.utils.logging import log
 
 
-class LearnToReply(base.BaseOnDemandScript):
+class LearnToReply(base.BaseOnDemandedScript):
     command_pattern = r'اگ(ر|ه) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
 
-    def command_update(self, command, data):
+    def received_command(self, command, data):
         match = re.search(self.command_pattern, command)
         if match:
             x = match.group('x')
@@ -27,7 +26,5 @@ class LearnToReply(base.BaseOnDemandScript):
             log("learned_replies size: {0}".format(
                 len(self.st_memory.memory['learned_replies'])))
             reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
-            self.twitter.twitter.send_direct_message(
+            self.twitter.send_direct_message(
                 text=reply_message, user=data['user']['id_str'])
-
-            raise DontReplyAnymore
