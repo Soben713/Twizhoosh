@@ -19,8 +19,8 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "spell_checker",
     "good_night",
     "nobody_cares",
-    "learn_to_reply",
     "reply_by_learned_replies",
+    "learn_to_reply",
 ]
 
 INSTALLED_STANDALONE_SCRIPTS = [

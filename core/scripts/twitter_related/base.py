@@ -9,14 +9,14 @@ from core.utils.logging import log
 
 class BaseTwitterRelatedScript(object, metaclass=ABCMeta):
     # List of events the script gets called for
-    listen_to = []
+    listen_to = None
 
     def __init__(self):
         self.twitter = TwitterSingleton()
         self.st_memory = STMemory()
 
     @abstractmethod
-    def update(self, data):
+    def update(self, data, data_type):
         """
         Called when someone @Twizhoosh follows, tweets something
         """
@@ -24,49 +24,35 @@ class BaseTwitterRelatedScript(object, metaclass=ABCMeta):
 
 
 class BaseTimelineScript(BaseTwitterRelatedScript):
-    listen_to = ['timeline_update']
+    listen_to = 'timeline_update'
 
     @abstractmethod
     def timeline_update(self, data):
         pass
 
-    def update(self, data):
+    def update(self, data, data_type):
         data['text'] = farsi_tools.normalize(data['text'])
         log("Timeline update:" + data['text'])
         self.timeline_update(data)
 
 
 class BaseOnSelfStatusUpdate(BaseTwitterRelatedScript):
-    listen_to = ['self_status_update']
+    listen_to = 'self_status_update'
 
     @abstractmethod
     def self_status_update(self, status):
         pass
 
-    def update(self, data):
+    def update(self, data, data_type):
         self.self_status_update(data)
 
 
-class BaseOnDemandedScript(BaseTimelineScript):
-    is_mentioned_regex = r'.*(tw*izho*u*sh|[ت|ط][ی|ي][ظ|ز|ذ|ض][ه|ح]و*ش)\S* (?P<command>.*)'
-
-    @abstractmethod
-    def received_command(self, command, data):
-        pass
-
-    def timeline_update(self, data):
-        match = re.search(self.is_mentioned_regex, data['text'], re.IGNORECASE)
-        if match:
-            command = match.group('command')
-            self.received_command(command, data)
-
-
 class BaseDirectMessageScript(BaseTwitterRelatedScript):
-    listen_to = ['direct_message']
+    listen_to = 'direct_message'
 
     @abstractmethod
     def received_direct_message(self, data):
         pass
 
-    def update(self, data):
+    def update(self, data, data_type):
         self.received_direct_message(data)

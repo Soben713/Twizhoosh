@@ -55,7 +55,8 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
                                                     settings.INSTALLED_TWITTER_RELATED_SCRIPTS)
         log("Loading twitter related scripts")
         for script in script_classes:
-            for event in script.listen_to:
+            listen_to = script.listen_to if isinstance(script.listen_to, list) else [script.listen_to]
+            for event in listen_to:
                 self.scripts.setdefault(event, []).append(script())
                 log("Loaded {0} for type {1}".format(script.__name__, event))
 
@@ -66,7 +67,7 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
         for script in self.scripts.setdefault(data_type, []):
             log("Data type: {1} script found: {0}".format(script.__class__.__name__, data_type))
             try:
-                script.update(data)
+                script.update(data, data_type)
             except TwythonError as e:
                 log("Twython error when occured when running script {0}\nError is:{1}".format(
                     script.__class__.__name__, e))

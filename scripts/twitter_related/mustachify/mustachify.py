@@ -3,12 +3,12 @@ import urllib
 from io import BytesIO
 
 import requests
-from core.scripts.twitter_related import base
 
+from core.scripts.twitter_related import on_demand
 from core.utils.logging import log
 
 
-class Mustachify(base.BaseOnDemandedScript):
+class Mustachify(on_demand.BaseOnTimelineDemandScript):
     command_pattern = '.*س(ی)?بیل.*'
 
     def received_command(self, command, data):

@@ -18,11 +18,11 @@ class ReplyByLearnedReplies(base.BaseTimelineScript):
         for k, v in learned_replies:
             if data['text'].find(k) > -1:
                 reply_item = random.choice(v)
-                teacher = reply_item['teaching_tweet']['user']['screen_name']
-                if teacher == data['user']['screen_name']:
+                teacher_screen_name = reply_item['teacher_screen_name']
+                if teacher_screen_name == data['user']['screen_name']:
                     reply_message = reply_item['text']
                 else:
                     reply_message = "@{0} {1}".format(
-                        teacher, reply_item['text'])
+                        teacher_screen_name, reply_item['text'])
                 self.twitter.reply_to(data, reply_message)
                 return
