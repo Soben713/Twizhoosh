@@ -18,4 +18,4 @@ if __name__ == '__main__':
     t = TwitterRelatedScripts()
     s = StandaloneScripts()
     t.start()
-    # s.start()
+    s.start()
