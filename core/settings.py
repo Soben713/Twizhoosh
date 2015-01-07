@@ -28,4 +28,4 @@ INSTALLED_STANDALONE_SCRIPTS = [
 ]
 
 # Stand-Alone repeat time chunks in seconds, every script may override number of chunks
-STAND_ALONE_REPEAT_TIME_CHUNKS = 1
+STAND_ALONE_REPEAT_TIME_CHUNKS = 10

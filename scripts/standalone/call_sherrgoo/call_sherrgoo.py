@@ -4,7 +4,7 @@ from core.utils.logging import log
 
 
 class CallSherrgoo(TweetPerDayBase):
-    expected_tweet_per_day = 2
+    expected_tweet_per_day = 1
 
     def update(self):
         account_name = "@SherrGoo"
@@ -16,6 +16,3 @@ class CallSherrgoo(TweetPerDayBase):
             'شرگو...',
         ]
         self.twitter.tweet(status=random.choice(calls))
-
-    def on_called(self):
-        super(CallSherrgoo, self).on_called()
