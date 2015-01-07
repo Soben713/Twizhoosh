@@ -1,5 +1,6 @@
 import random
 import re
+from twython.exceptions import TwythonError
 
 from core import settings
 from core.scripts.twitter_related import base
@@ -42,8 +43,13 @@ class DedicateRoundTweets(base.BaseOnSelfStatusUpdate):
     def dedicate_to(self):
         if not settings.DEBUG:
             friends = self.twitter.twitter.get_friends_ids(screen_name=settings.TWIZHOOSH_USERNAME)
+            log("found friends: " + str(friends))
             id = random.choice(friends['ids'])
-            dedicated_to = self.twitter.twitter.show_user(user_id=id)['screen_name']
+            try:
+                dedicated_to = self.twitter.twitter.show_user(user_id=id)['screen_name']
+            except TwythonError:
+                log("Last call headers:\n + " + str(self.twitter.twitter._last_call))
+            log("dedicate to: " + dedicated_to)
         else:
             dedicated_to = 'tester'
         return dedicated_to
