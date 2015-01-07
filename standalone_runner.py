@@ -22,7 +22,6 @@ def run():
             for script in scripts:
                 remaining_chunks[script.__class__.__name__] -= 1
                 if remaining_chunks[script.__class__.__name__] == 0:
-                    log("Running standalone script: {0}".format(script.__class__.__name__))
                     remaining_chunks[script.__class__.__name__] = script.repeat_time
                     script.on_called()
 

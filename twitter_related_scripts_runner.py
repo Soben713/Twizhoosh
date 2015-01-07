@@ -6,8 +6,9 @@ import time
 from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
-from core.utils.singleton import Singleton
+from core.utils.sample_twitter_responses import sample_tweet, sample_direct_message
 
+from core.utils.singleton import Singleton
 from core.utils.logging import log
 from core import settings, script_loader
 
@@ -62,6 +63,11 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
 
     def on_success(self, data):
         data_type = ParseStreamingData.get_type_of_data(data)
+
+        if not data_type:
+            log("Type of data unknown \n {0}".format(data))
+            return
+
         log("Data received, with type: " + data_type)
         log("Data: {0}".format(data))
         for script in self.scripts.setdefault(data_type, []):
@@ -86,11 +92,32 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
                 log("Twython error {0}".format(e))
 
 
+class Testing(StreamingSingleton):
+    def __init__(self, *args, **kwargs):
+        self.load_scripts()
+
+    def user(self, *args, **kwargs):
+        while True:
+            input_type = input("Enter a data type number \n 1. Timeline  \n 2. Direct Message \n 3. Custom data \n")
+            if input_type == '1':
+                timeline_text = input("Enter a tweet\n")
+                data = sample_tweet
+                data['text'] = timeline_text
+            elif input_type == '2':
+                message_text = input("Enter a direct message to @" + settings.TWIZHOOSH_USERNAME + "\n")
+                data = sample_direct_message
+                data['direct_message']['text'] = message_text
+            else:
+                data = eval(input("Enter your data object \n"))
+
+            self.on_success(data)
+
+
 def run():
     if not settings.DEBUG:
         log("Starting streamer...")
         stream = StreamingSingleton()
         stream.user(replies="all")
     else:
-        # TODO: implement testing mode
-        log("Twitter related scripts testing mode is not ready...")
+        stream = Testing()
+        stream.user(replies="all")
