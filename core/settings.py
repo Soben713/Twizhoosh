@@ -21,6 +21,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "nobody_cares",
     "reply_by_learned_replies",
     "learn_to_reply",
+    "get_grade",
 ]
 
 INSTALLED_STANDALONE_SCRIPTS = [
