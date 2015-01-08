@@ -19,7 +19,7 @@ class BaseOnDemandedScript(BaseTwitterRelatedScript):
         :param text: A text to be checked
         :return: Extracts command from text or returns False
         """
-        match = re.search(self.is_mentioned_regex, text, re.IGNORECASE)
+        match = re.search(self.is_mentioned_regex, text, re.IGNORECASE | re.DOTALL)
         if match:
             command = match.group('command')
             return command
