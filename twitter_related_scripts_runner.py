@@ -98,17 +98,18 @@ class Testing(StreamingSingleton):
 
     def user(self, *args, **kwargs):
         while True:
-            input_type = input("Enter a data type number \n 1. Timeline  \n 2. Direct Message \n 3. Custom data \n")
+            input_type = input("Enter a data type number or just tweet something \n 1. Direct Message \n 2. Custom data \n")
+
             if input_type == '1':
-                timeline_text = input("Enter a tweet\n")
-                data = sample_tweet
-                data['text'] = timeline_text
-            elif input_type == '2':
                 message_text = input("Enter a direct message to @" + settings.TWIZHOOSH_USERNAME + "\n")
                 data = sample_direct_message
                 data['direct_message']['text'] = message_text
-            else:
+            elif input_type == '2':
                 data = eval(input("Enter your data object \n"))
+            else:
+                timeline_text = input_type
+                data = sample_tweet
+                data['text'] = timeline_text
 
             self.on_success(data)
 
