@@ -6,7 +6,7 @@ from core.utils.logging import log
 
 
 class GetGrade(on_demand.BaseOnTimelineDemandScript):
-    command_pattern = '.* چند می( |‌)شم؟'
+    command_pattern = r'.*چند می( |‌)?ش(و)?م.*'
 
     def received_command(self, command, data):
         match = re.search(self.command_pattern, command)
