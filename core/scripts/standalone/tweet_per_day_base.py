@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from random import randint
 
-from core import settings
+import settings
 from core.scripts.standalone.base import BaseStandaloneScript
 
 

@@ -1,5 +1,4 @@
-import os
-from core import settings
+import settings
 
 
 def log(text):

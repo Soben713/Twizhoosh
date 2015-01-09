@@ -7,10 +7,10 @@ from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
 from core.utils.sample_twitter_responses import sample_tweet, sample_direct_message
-
 from core.utils.singleton import Singleton
 from core.utils.logging import log
-from core import settings, script_loader
+from core import script_loader
+import settings
 
 
 class ParseStreamingData():

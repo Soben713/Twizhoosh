@@ -1,7 +1,6 @@
 import threading
 
-import standalone_runner
-import twitter_related_scripts_runner
+from core import standalone_runner, twitter_related_scripts_runner
 
 
 class TwitterRelatedScripts(threading.Thread):

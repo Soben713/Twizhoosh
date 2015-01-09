@@ -1,9 +1,7 @@
 from twython.api import Twython
-
 from twython.exceptions import TwythonError
 
-from core import settings
-
+import settings
 from core.utils.logging import log
 from core.utils.singleton import Singleton
 

@@ -1,8 +1,9 @@
 import random
 import re
+
 from twython.exceptions import TwythonError
 
-from core import settings
+import settings
 from core.scripts.twitter_related import base
 from core.utils.logging import log
 

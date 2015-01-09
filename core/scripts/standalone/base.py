@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from core import settings
+
 from core.twitter_singleton import TwitterSingleton
 
 

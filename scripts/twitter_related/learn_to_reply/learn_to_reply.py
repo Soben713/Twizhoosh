@@ -2,7 +2,7 @@ import re
 
 from core.scripts.twitter_related import on_demand, base
 from core.utils.logging import log
-from twitter_related_scripts_runner import ParseStreamingData
+from core.twitter_related_scripts_runner import ParseStreamingData
 
 
 class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTimelineDemandScript):

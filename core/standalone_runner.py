@@ -4,7 +4,7 @@ import time
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
 from core.script_loader import load_scripts
-from core.settings import INSTALLED_STANDALONE_SCRIPTS, STAND_ALONE_REPEAT_TIME_CHUNKS
+from settings import INSTALLED_STANDALONE_SCRIPTS, STAND_ALONE_REPEAT_TIME_CHUNKS
 from core.utils.logging import log
 
 

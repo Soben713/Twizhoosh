@@ -29,7 +29,7 @@ There are two types of scripts:
 1. Twitter related scripts: These scripts listen to events returned by Twitter's streaming API.
 2. Stand-alone scripts: Called repeatedly.
 
-Take a look at current scripts in `scripts` folder. Do not forget to add your scripts to `core/settings.py` after
+Take a look at current scripts in `scripts` folder. Do not forget to add your scripts to `settings.py` after
 implementing.
 
 ## Testing
