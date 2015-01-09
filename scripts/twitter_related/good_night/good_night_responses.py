@@ -7,4 +7,5 @@ goodnight_responses = [
     ':*',
     'do not go gentle into that goodnight',
     ' آسوده بخواب ، عدالت بیدار است - دوست دارت ، بتمن',
+    'مرسی که بودی. مرسی که هستی :)',
 ]
