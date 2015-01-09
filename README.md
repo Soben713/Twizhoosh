@@ -16,8 +16,8 @@ correction entry) you may just browse the file on Github and click on the edit i
 for you. But if you are trying to implement a script for Twizhoosh you should:
 
 1. Fork Twizhoosh.
-2. Create your feature branch: `git checkout -b my-new-script`
-3. Implement your feature.
+2. Create your script branch: `git checkout -b my-new-script`
+3. Implement your script.
 4. Commit your changes: `git commit -am 'Add some script'`
 5. Push to the branch: `git push origin my-new-script`
 6. Submit a pull request.
@@ -33,7 +33,7 @@ Take a look at current scripts in `scripts` folder. Do not forget to add your sc
 implementing.
 
 ## Testing
-Before submitting a pull request, test your feature. You can do it by running `app.py` and simulating the timeline.
+Before submitting a pull request, test your script by running `twizhoosh.py`.
 
 ## Requirements
 You need `Python 3.4` or later and `twython 3.2` to run the code.
