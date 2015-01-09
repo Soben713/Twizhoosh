@@ -1,5 +1,7 @@
 .env
 rhc-set-env.sh
+Procfile
+runtime.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
