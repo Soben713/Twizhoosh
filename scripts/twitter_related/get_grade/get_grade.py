@@ -2,6 +2,7 @@ import random
 import re
 
 from core.scripts.twitter_related import on_demand
+from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
 
 
@@ -29,3 +30,4 @@ class GetGrade(on_demand.BaseOnTimelineDemandScript):
                     break
 
             self.twitter.reply_to(data, "{0:.1f}".format(grade))
+            EventDispatcherSingleton().do_not_call_other_scripts()

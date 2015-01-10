@@ -6,6 +6,7 @@ import time
 from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
+from core.exceptions import DoNotCallOtherScripts
 from core.utils.sample_twitter_responses import sample_tweet, sample_direct_message
 from core.utils.singleton import Singleton
 from core.utils.logging import log
@@ -37,12 +38,12 @@ class ParseStreamingData():
         return None
 
 
-class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
+class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
     # dict of events to list of subscribing script instances
     scripts = {}
 
     def __init__(self, *args, **kwargs):
-        super(StreamingSingleton, self).__init__(
+        super(EventDispatcherSingleton, self).__init__(
             settings.CONSUMER_KEY, settings.CONSUMER_SECRET, settings.OAUTH_TOKEN, settings.OAUTH_TOKEN_SECRET,
             *args, **kwargs
         )
@@ -74,8 +75,10 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
             log("Data type: {1} script found: {0}".format(script.__class__.__name__, data_type))
             try:
                 getattr(script, 'on_' + data_type)(data)
+            except DoNotCallOtherScripts:
+                break
             except TwythonError as e:
-                log("Twython error when occured when running script {0}\nError is:{1}".format(
+                log("Twython error when occurred when running script {0}\nError is:{1}".format(
                     script.__class__.__name__, e))
 
     def on_error(self, status_code, data):
@@ -84,21 +87,25 @@ class StreamingSingleton(TwythonStreamer, metaclass=Singleton):
     def user(self, *args, **kwargs):
         while True:
             try:
-                super(StreamingSingleton, self).user(self, *args, **kwargs)
+                super(EventDispatcherSingleton, self).user(self, *args, **kwargs)
             except TwythonRateLimitError as e:
                 log("Rate limit error, asks to retry after {0}".format(e.retry_after))
                 time.sleep(min(int(e.retry_after), 5))
             except TwythonError as e:
                 log("Twython error {0}".format(e))
 
+    def do_not_call_other_scripts(self):
+        raise DoNotCallOtherScripts()
 
-class Testing(StreamingSingleton):
+
+class Testing(EventDispatcherSingleton):
     def __init__(self, *args, **kwargs):
         self.load_scripts()
 
     def user(self, *args, **kwargs):
         while True:
-            input_type = input("Enter a data type number or just tweet something \n 1. Direct Message \n 2. Custom data \n")
+            input_type = input(
+                "Enter a data type number or just tweet something \n 1. Direct Message \n 2. Custom data \n")
 
             if input_type == '1':
                 message_text = input("Enter a direct message to @" + settings.TWIZHOOSH_USERNAME + "\n")
@@ -117,7 +124,7 @@ class Testing(StreamingSingleton):
 def run():
     if not settings.DEBUG:
         log("Starting streamer...")
-        stream = StreamingSingleton()
+        stream = EventDispatcherSingleton()
         stream.user(replies="all")
     else:
         stream = Testing()

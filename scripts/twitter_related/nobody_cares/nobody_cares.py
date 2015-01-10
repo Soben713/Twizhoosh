@@ -4,6 +4,7 @@ import random
 from twython.exceptions import TwythonError
 
 from core.scripts.twitter_related import base
+from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
 
 
@@ -29,5 +30,6 @@ class NobodyCares(base.BaseTimelineScript):
                 media=photo,
                 in_reply_to_status_id=data['id_str']
             )
+            EventDispatcherSingleton().do_not_call_other_scripts()
         except TwythonError as e:
             print(e)

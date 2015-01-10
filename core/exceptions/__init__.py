@@ -1,5 +1,5 @@
 class TwizhooshException(Exception):
     pass
 
-class DontReplyAnymore(TwizhooshException):
+class DoNotCallOtherScripts(TwizhooshException):
     pass

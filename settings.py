@@ -13,17 +13,19 @@ TWEET_URL_LENGTH = 21
 TWIZHOOSH_USERNAME = 'twizhoosh'
 
 
+# Ordered list of installed twitter related scripts
 INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "dedicate_round_tweets",
-    "mustachify",
     "spell_checker",
+    "mustachify",
+    "get_grade",
     "good_night",
-    "nobody_cares",
     "reply_by_learned_replies",
     "learn_to_reply",
-    "get_grade",
+    "nobody_cares",
 ]
 
+# Ordered list of installed standalone scripts
 INSTALLED_STANDALONE_SCRIPTS = [
     "call_sherrgoo",
     "give_advice",

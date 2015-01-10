@@ -8,6 +8,7 @@ from abc import ABCMeta
 from twython import *
 
 from core.scripts.twitter_related.base import BaseTimelineScript
+from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
 
 
@@ -36,5 +37,8 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
                             if self.answer_once:
                                 self.st_memory.mark_person(self.__class__.__name__, data)
                             self.twitter.reply_to(data, random.choice(reply['reply_messages']))
+
+                            EventDispatcherSingleton().do_not_call_other_scripts()
+
                         except TwythonError as e:
                             print(e)
