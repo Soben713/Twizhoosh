@@ -26,6 +26,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
 
 INSTALLED_STANDALONE_SCRIPTS = [
     "call_sherrgoo",
+    "give_advice",
 ]
 
 # Stand-Alone repeat time chunks in seconds, every script may override number of chunks
