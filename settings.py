@@ -18,6 +18,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "dedicate_round_tweets",
     "remind_round_tweets",
     "spell_checker",
+    "choose_random_choice",
     "mustachify",
     "get_grade",
     "good_night",
