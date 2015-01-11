@@ -94,7 +94,7 @@ class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
             except TwythonError as e:
                 log("Twython error {0}".format(e))
 
-    def do_not_call_other_scripts(self):
+    def terminate_scripts(self):
         raise DoNotCallOtherScripts()
 
 

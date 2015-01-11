@@ -16,6 +16,7 @@ TWIZHOOSH_USERNAME = 'twizhoosh'
 # Ordered list of installed twitter related scripts
 INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "dedicate_round_tweets",
+    "remind_round_tweets",
     "spell_checker",
     "mustachify",
     "get_grade",

@@ -8,7 +8,7 @@ from core.twitter_related_scripts_runner import ParseStreamingData
 class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTimelineDemandScript):
     MINIMUM_LENGTH = 7
     listen_to = [base.BaseTimelineScript.listen_to, base.BaseDirectMessageScript.listen_to]
-    command_pattern = r'اگ(ر|ه) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
+    command_pattern = r'(هر|اگ(ر|ه)) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
 
     def received_command(self, command, data):
         data_type = ParseStreamingData.get_type_of_data(data)
@@ -32,17 +32,17 @@ class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTi
                 error_msg = 'به منشن‌ها جواب نمی‌دم. :)'
 
             if error_msg:
-                self.twitter.send_direct_message(text=error_msg, user=teacher_id)
+                self.twitter.send_direct_message(text=error_msg, user_id=teacher_id)
                 return
 
             self.st_memory.memory.setdefault('learned_replies', {}).setdefault(x, []).append({
                 'text': y,
                 'teacher_id': teacher_id,
                 'teacher_screen_name': teacher_screen_name,
+                'times_used': 0,
             })
 
             log("learned_replies size: {0}".format(
                 len(self.st_memory.memory['learned_replies'])))
             reply_message = 'اوکی اگر کسی گفت {0} می‌گم {1}.'.format(x, y)
-            self.twitter.send_direct_message(
-                text=reply_message, user=teacher_id)
+            self.twitter.send_direct_message(text=reply_message, user_id=teacher_id)

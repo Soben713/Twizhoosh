@@ -38,7 +38,7 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
                                 self.st_memory.mark_person(self.__class__.__name__, data)
                             self.twitter.reply_to(data, random.choice(reply['reply_messages']))
 
-                            EventDispatcherSingleton().do_not_call_other_scripts()
+                            EventDispatcherSingleton().terminate_scripts()
 
                         except TwythonError as e:
                             print(e)

@@ -56,5 +56,8 @@ class TwitterSingleton(metaclass=Singleton):
         except TwythonError as e:
             log("Twython error, updating status with media: {0}".format(e))
 
-    def send_direct_message(self, text, user, *args, **kwargs):
-        self.twitter.send_direct_message(text=text, user=user, *args, **kwargs)
+    def send_direct_message(self, text, user_id=None, screen_name=None):
+        if user_id:
+            self.twitter.send_direct_message(text=text, user_id=user_id)
+        elif screen_name:
+            self.twitter.send_direct_message(text=text, screen_name=screen_name)

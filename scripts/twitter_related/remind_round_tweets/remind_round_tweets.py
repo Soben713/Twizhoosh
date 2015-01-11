@@ -4,6 +4,7 @@ from scripts.twitter_related.dedicate_round_tweets.dedicate_round_tweets import 
 
 class RemindRoundTweets(BaseTimelineScript):
     def on_timeline_update(self, data):
-        if is_round(data['user']['statuses_count'] + 1):
-            text = 'توییت بعدی شما رند است'
-            self.twitter.send_direct_message(text, data['user']['id'])
+        next_tweet = data['user']['statuses_count'] + 1
+        if is_round(next_tweet):
+            text = 'توییت بعدی شما توییت {0}ام است، که توییتی رند است.'.format(next_tweet)
+            self.twitter.send_direct_message(text=text, user_id=data['user']['id'])

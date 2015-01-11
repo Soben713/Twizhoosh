@@ -37,7 +37,7 @@ class Mustachify(on_demand.BaseOnTimelineDemandScript):
                     in_reply_to_status_id=data['id_str']
                 )
 
-                EventDispatcherSingleton().do_not_call_other_scripts()
+                EventDispatcherSingleton().terminate_scripts()
 
             else:
                 self.twitter.reply_to(data, ':)')

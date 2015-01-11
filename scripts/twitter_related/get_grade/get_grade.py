@@ -30,4 +30,4 @@ class GetGrade(on_demand.BaseOnTimelineDemandScript):
                     break
 
             self.twitter.reply_to(data, "{0:.1f}".format(grade))
-            EventDispatcherSingleton().do_not_call_other_scripts()
+            EventDispatcherSingleton().terminate_scripts()

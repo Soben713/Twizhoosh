@@ -30,6 +30,6 @@ class NobodyCares(base.BaseTimelineScript):
                 media=photo,
                 in_reply_to_status_id=data['id_str']
             )
-            EventDispatcherSingleton().do_not_call_other_scripts()
+            EventDispatcherSingleton().terminate_scripts()
         except TwythonError as e:
             print(e)
