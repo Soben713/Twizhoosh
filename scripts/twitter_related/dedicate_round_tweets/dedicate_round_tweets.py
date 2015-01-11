@@ -20,17 +20,17 @@ def cons_numbers(x):
     return True
 
 
-regex_patterns = [
-    r'^[0-9]+00$',  # Numbers that end with 00
-    r'^([0-9])\1+$',  # Numbers that are all equal
-]
-
-function_patterns = [
-    cons_numbers,  # Consecutive numbers, like 2345 or 8765
-]
-
-
 def is_round(num):
+    regex_patterns = [
+        r'^[0-9]{1,2}?00$',  # Numbers that end with 00 and are less than 5 digits
+        r'^[0-9]+000$',  # Numbers that end with 000
+        r'^([0-9])\1+$',  # Numbers that are all equal
+    ]
+
+    function_patterns = [
+        cons_numbers,  # Consecutive numbers, like 2345 or 8765
+    ]
+
     if len(str(num)) < 3:
         return
     for regex in regex_patterns:
@@ -47,7 +47,7 @@ class DedicateRoundTweets(base.BaseOnSelfStatusUpdate):
         friends = []
         cursor = -1
 
-        while cursor!= 0:
+        while cursor != 0:
             data = self.twitter.twitter.get_friends_list(screen_name=settings.TWIZHOOSH_USERNAME, count=200,
                                                          skip_status=1, include_user_entities="false", cursor=cursor)
             friends += data['users']

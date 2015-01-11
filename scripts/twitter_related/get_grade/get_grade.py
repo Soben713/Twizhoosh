@@ -1,15 +1,15 @@
 import random
 import re
 
-from core.scripts.twitter_related import on_demand
+from core.scripts.twitter_related import on_demand, base
 from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
 
 
-class GetGrade(on_demand.BaseOnTimelineDemandScript):
+class GetGrade(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
     command_pattern = r'.*چند می( |‌)?ش((و)?م|(ه|(و)?د)).*'
 
-    def received_command(self, command, data):
+    def received_command(self, command, data, reply_message, *args, **kwargs):
         if re.search(self.command_pattern, command):
             # Probability of the grade being between second and third items
             probs = [
@@ -23,11 +23,13 @@ class GetGrade(on_demand.BaseOnTimelineDemandScript):
 
             rand = random.random()
             _x = 0.0
+            grade = 0
+
             for i in range(len(probs)):
                 _x += probs[i][0]
                 if rand <= _x:
                     grade = random.random() * (probs[i][2] - probs[i][1]) + probs[i][1]
                     break
 
-            self.twitter.reply_to(data, "{0:.1f}".format(grade))
+            reply_message("{0:.1f}".format(grade))
             EventDispatcherSingleton().terminate_scripts()

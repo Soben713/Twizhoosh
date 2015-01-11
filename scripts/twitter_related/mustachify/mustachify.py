@@ -12,7 +12,7 @@ from core.utils.logging import log
 class Mustachify(on_demand.BaseOnTimelineDemandScript):
     command_pattern = '.*س(ی)?بیل.*'
 
-    def received_command(self, command, data):
+    def received_command(self, command, data, reply_function, *args, **kwargs):
         match = re.search(self.command_pattern, command)
 
         if match:

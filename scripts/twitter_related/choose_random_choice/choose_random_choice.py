@@ -1,13 +1,13 @@
 import random
 import re
 
-from core.scripts.twitter_related import on_demand
+from core.scripts.twitter_related import on_demand, base
 from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.farsi_tools import add_dummy_spaces
 
 
-class ChooseRandomChoice(on_demand.BaseOnTimelineDemandScript):
-    def received_command(self, command, data):
+class ChooseRandomChoice(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
+    def received_command(self, command, data, reply_function, *args, **kwargs):
         has_p_regex = r'\((?P<choices>.*)\)'
         p = re.search(has_p_regex, command)
         if not p:
@@ -21,5 +21,5 @@ class ChooseRandomChoice(on_demand.BaseOnTimelineDemandScript):
 
         choice = add_dummy_spaces(random.choice(choices), 10)
 
-        self.twitter.reply_to(data, choice)
+        reply_function(choice)
         EventDispatcherSingleton().terminate_scripts()
