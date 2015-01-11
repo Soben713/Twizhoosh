@@ -2,7 +2,7 @@ import re
 
 from core.scripts.twitter_related import on_demand, base
 from core.utils.logging import log
-from core.twitter_related_scripts_runner import ParseStreamingData
+from core.twitter_related_scripts_runner import DataParser
 
 
 class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTimelineDemandScript):
@@ -11,7 +11,7 @@ class LearnToReply(on_demand.BaseOnDirectMessageDemandScript, on_demand.BaseOnTi
     command_pattern = r'(هر|اگ(ر|ه)) کسی( بهت)? گفت (?P<x>.*) بگو (?P<y>.*)'
 
     def received_command(self, command, data):
-        data_type = ParseStreamingData.get_type_of_data(data)
+        data_type = DataParser.get_type_of_data(data)
 
         if data_type == base.BaseTimelineScript.listen_to:
             teacher_id = data['user']['id_str']

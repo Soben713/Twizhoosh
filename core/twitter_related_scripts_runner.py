@@ -7,6 +7,7 @@ from twython import *
 from twython.exceptions import TwythonError, TwythonRateLimitError
 
 from core.exceptions import DoNotCallOtherScripts
+from core.utils import farsi_tools
 from core.utils.sample_twitter_responses import sample_tweet, sample_direct_message
 from core.utils.singleton import Singleton
 from core.utils.logging import log
@@ -14,7 +15,7 @@ from core import script_loader
 import settings
 
 
-class ParseStreamingData():
+class DataParser():
     @staticmethod
     def get_type_of_data(data):
         keys = list(data.keys())
@@ -36,6 +37,15 @@ class ParseStreamingData():
         # Add any other types that I forgot (didn't care about)
 
         return None
+
+
+def normalize_data(data):
+    type = DataParser.get_type_of_data(data)
+    if type == 'timeline_update':
+        data['text'] = farsi_tools.normalize(data['text'])
+    elif type == 'direct_message':
+        data['direct_message']['text'] = farsi_tools.normalize(data['direct_message']['text'])
+    return data
 
 
 class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
@@ -63,7 +73,8 @@ class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
                 log("Loaded {0} for type {1}".format(script.__name__, event))
 
     def on_success(self, data):
-        data_type = ParseStreamingData.get_type_of_data(data)
+        data_type = DataParser.get_type_of_data(data)
+        data = normalize_data(data)
 
         if not data_type:
             log("Type of data unknown \n {0}".format(data))
@@ -71,6 +82,7 @@ class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
 
         log("Data received, with type: " + data_type)
         log("Data: {0}".format(data))
+
         for script in self.scripts.setdefault(data_type, []):
             log("Data type: {1} script found: {0}".format(script.__class__.__name__, data_type))
             try:
