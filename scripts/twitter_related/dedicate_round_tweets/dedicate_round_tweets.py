@@ -19,6 +19,7 @@ def cons_numbers(x):
             return False
     return True
 
+
 regex_patterns = [
     r'^[0-9]+00$',  # Numbers that end with 00
     r'^([0-9])\1+$',  # Numbers that are all equal
@@ -27,6 +28,7 @@ regex_patterns = [
 function_patterns = [
     cons_numbers,  # Consecutive numbers, like 2345 or 8765
 ]
+
 
 def is_round(num):
     if len(str(num)) < 3:
@@ -41,17 +43,29 @@ def is_round(num):
 
 
 class DedicateRoundTweets(base.BaseOnSelfStatusUpdate):
+    def get_all_friends(self):
+        friends = []
+        cursor = -1
+
+        while cursor!= 0:
+            data = self.twitter.twitter.get_friends_list(screen_name=settings.TWIZHOOSH_USERNAME, count=200,
+                                                         skip_status=1, include_user_entities="false", cursor=cursor)
+            friends += data['users']
+            cursor = data['next_cursor']
+
+        return friends
+
+
     def dedicate_to(self):
         if not settings.DEBUG:
-            friends = self.twitter.twitter.get_friends_ids(screen_name=settings.TWIZHOOSH_USERNAME)
-            log("found friends: " + str(friends))
-            id = str(random.choice(friends['ids']))
-            # Should be show_user since we're catching info for one user, but twitter returns nothing, idk why
-            dedicated_to = self.twitter.twitter.show_user(user_id=id)['screen_name']
-            log("dedicate to: " + dedicated_to)
+            # Correct way is to retrieve id's then show_user but doesn't work on heroku
+            friends = self.get_all_friends()
+            dedicated_to = random.choice(friends)['screen_name']
         else:
             dedicated_to = 'tester'
+        log("Dedicate tweet to: " + dedicated_to)
         return dedicated_to
+
 
     def on_self_status_update(self, data):
         tweets = data['user']['statuses_count']
