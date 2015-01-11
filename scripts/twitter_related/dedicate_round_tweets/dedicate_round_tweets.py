@@ -22,7 +22,6 @@ def cons_numbers(x):
 
 def is_round(num):
     regex_patterns = [
-        r'^[0-9]{1,2}?00$',  # Numbers that end with 00 and are less than 5 digits
         r'^[0-9]+000$',  # Numbers that end with 000
         r'^([0-9])\1+$',  # Numbers that are all equal
     ]
