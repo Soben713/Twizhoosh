@@ -32,6 +32,8 @@ class DataParser():
         if 'text' in data and 'favorite_count' in data:
             if data['user']['screen_name'] == settings.TWIZHOOSH_USERNAME:
                 return 'self_status_update'
+            elif 'retweeted_status' in data:
+                return 'retweet'
             return 'timeline_update'
 
         # Add any other types that I forgot (didn't care about)
