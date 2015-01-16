@@ -20,21 +20,24 @@ class DataParser():
     def get_type_of_data(data):
         keys = list(data.keys())
 
-        if len(keys) == 1:
-            # Many streaming api data like messages, friends etc have only one key
-            return keys[0]
-
-        if 'event' in data:
-            # See list of events here:
-            # https://dev.twitter.com/streaming/overview/messages-types#user_stream_messsages
-            return data['event']
-
         if 'text' in data and 'favorite_count' in data:
             if data['user']['screen_name'] == settings.TWIZHOOSH_USERNAME:
                 return 'self_status_update'
             elif 'retweeted_status' in data:
                 return 'retweet'
             return 'timeline_update'
+
+        if len(keys) == 1:
+            # Many streaming api data like messages, friends etc have only one key
+            if 'direct_message' in data \
+                    and data['direct_message']['sender']['screen_name'] == settings.TWIZHOOSH_USERNAME:
+                return 'self_direct_message'
+            return keys[0]
+
+        if 'event' in data:
+            # See list of events here:
+            # https://dev.twitter.com/streaming/overview/messages-types#user_stream_messsages
+            return data['event']
 
         # Add any other types that I forgot (didn't care about)
 

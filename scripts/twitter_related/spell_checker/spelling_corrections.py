@@ -77,7 +77,7 @@ spelling_corrections = {
     'رهبریت': 'رهبری',
     'منیٔت': 'منی',
     'دوئیت': 'دوئی',
-    ' گاهن': 'گاهی', # Space to prevent problems with the word دانشگاهن
+    ' گاهن': 'گاهی',  # Space to prevent problems with the word دانشگاهن
     'گاهاً': 'گاهی',
     'سفارشاً': 'سفارشی',
     'سفارشن': 'شفارشی',
