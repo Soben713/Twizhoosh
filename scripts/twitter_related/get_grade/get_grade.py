@@ -1,3 +1,4 @@
+from logging import log
 import random
 import re
 
@@ -22,6 +23,8 @@ class GetGrade(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
             ]
 
             rand = random.random()
+            log("rand: %s" % rand)
+
             _x = 0.0
             grade = 0
 
@@ -30,6 +33,8 @@ class GetGrade(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
                 if rand <= _x:
                     grade = random.random() * (probs[i][2] - probs[i][1]) + probs[i][1]
                     break
+
+            log("Guessed grade: %s" % grade)
 
             reply_message("{0:.1f}".format(grade))
             EventDispatcherSingleton().terminate_scripts()
