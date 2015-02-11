@@ -10,13 +10,14 @@ import settings
 
 twitter_related_scripts = settings.INSTALLED_TWITTER_RELATED_SCRIPTS
 
-template = \
-    '---' \
-    'layout: post' \
-    'title: %(title)s' \
-    'source: %(source)s' \
-    '---' \
-    '%(content)s' \
+template = (
+    '---\n'
+    'layout: post\n'
+    'title: %(title)s\n'
+    'source: %(source)s\n'
+    '---\n'
+    '%(content)s'
+)
 
 source = 'https://github.com/Soben713/Twizhoosh/tree/master/scripts/twitter_related/%s'
 
