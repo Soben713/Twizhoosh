@@ -11,6 +11,9 @@
 	
 	<nav class="site-nav">
 		<ul>
+            <!--
+            Hardcoding since order is important
+
 			{% for page in site.pages %}
 				{% if page.title and page.hide != true %}
 				<li>
@@ -18,6 +21,16 @@
 				</li>
 				{% endif %}
 			{% endfor %}
+			-->
+            <li>
+                <a class="page-link" href="{{site.baseurl}}/">Home</a>
+            </li>
+            <li>
+                <a class="page-link" href="{{site.baseurl}}/scripts/">What He Does</a>
+            </li>
+            <li>
+                <a class="page-link" href="{{site.baseurl}}/developers/">Developers Guide</a>
+            </li>
 		</ul>
 	</nav>
 	
