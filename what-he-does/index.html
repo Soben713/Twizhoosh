@@ -1,0 +1,38 @@
+---
+layout: default
+title: What He Does
+permalink: /scripts/
+---
+
+<div class="home">
+
+    <div class="call-out">
+        Does many things, just aks.
+    </div>
+
+    <div class="posts">
+        {% for post in site.posts %}
+        <div class="post-teaser">
+
+            <header class="post-header">
+                <h3 class="title">
+                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                </h3>
+                <a class="source" href="{{ post.source }}" target="_blank">
+                    Source Code
+                </a>
+                <div class="clearfix"></div>
+            </header>
+
+            <div class="excerpt">
+                {{ post.excerpt | markdownify }}
+
+                <a class="btn btn-primary" href="{{ post.url | prepend: site.baseurl }}">
+                    View More
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,26 @@
+div.main-page{
+
+  div.heading {
+    background-color: $primary-color;
+    padding: 50px 0;
+    color: white;
+    text-align: center;
+
+    .illustration {
+      @media
+      (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+          background-image: url('/img/logo-mainpage-2x.png');
+      }
+      background-image: url('/img/logo-mainpage.png');
+      background-size: 228px 250px;
+      width: 228px;
+      height:250px;
+      margin: auto;
+    }
+
+    h2 {
+      font-weight: 200;
+      font-size: 1.7em;
+    }
+  }
+}

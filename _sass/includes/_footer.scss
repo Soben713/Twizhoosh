@@ -1,0 +1,24 @@
+$color: lighten($text-color, 30%);
+.site-footer {
+  @extend %padding-regular;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  color: $color;
+  font-size: 0.9em;
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+    list-style: none;
+    a {
+      color: lighten($text-color, 30%);
+      transition: 0.3s;
+      font-size: 1.4em;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}

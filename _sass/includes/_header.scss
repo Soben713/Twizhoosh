@@ -1,0 +1,63 @@
+.site-header {
+  @extend %padding-small;
+  background: $brand-color;
+  display: inline-block;
+  width: 100%;
+  
+  a {
+    color: $header-link-color;
+  }
+
+  h1 {
+    margin: 0;
+  }
+  
+  .avatar {
+    float: left;
+    margin-top: -7px;
+    margin-right: 1em;
+    @media
+      (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url('/img/avatar-2x.png');
+    }
+    background-image: url('/img/avatar.png');
+    background-size: 45px 45px;
+    width: 45px;
+    height: 45px;
+    border:none;
+  }
+  
+  .site-title {
+    float: left;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  .site-nav {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      line-height: 1.5;
+      float: right;
+      text-align: right;
+    }
+    li {
+      display: inline;
+      float: left;
+      margin-right: 30px;
+    }
+    @media (max-width: 1100px) {
+      ul {
+        display: inline-block;
+        float: left;
+        padding-top: $padding-small;
+        text-align: left;
+        width: 100%;
+      } 
+    }
+  }
+}
