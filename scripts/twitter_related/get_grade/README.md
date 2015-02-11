@@ -6,11 +6,11 @@ Ask Twizhoosh to guess your grade by including `what grade will I get` in your t
 
 ---
 
-Sample Tweet
+**Sample Tweet**
 
 > @twizhoosh What grade will I get in Operating Systems?
 
-Sample Response
+**Sample Response**
 
 > 11.5/20
 

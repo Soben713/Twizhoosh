@@ -5,24 +5,24 @@ Put a list of choices in paranthesis separated by `|`, `\` or `/` and Twizhoosh 
 You can even include more than one choices list in a tweet and the response will contain the choosen choices
 separated by spaces.
 
-<!--examples-->
+<!--more-->
 
 ---
 
-Sample Tweet
+**Sample Tweet**
 
 > @twizhoosh Which one do you prefer? (Apples/Bananas)
 
-Sample Response
+**Sample Response**
 
 > Bananas
 
 ---
 
-Sample Tweet
+**Sample Tweet**
 
 > @twizhoosh Which one do you prefer? (Red/Blue/Green) (apples/bananas)
 
-Sample Response
+**Sample Response**
 
 > Red bananas
