@@ -57,6 +57,13 @@ def collect_docs():
             readme_file.close()
 
 
+def exec_command(command):
+    print('>' + command)
+    ret = os.system(command)
+    print(ret)
+    return ret
+
+
 if __name__ == "__main__":
     collect_docs()
     commands = """
@@ -72,8 +79,7 @@ if __name__ == "__main__":
     """
 
     for command in commands.split('\n'):
-        print('>' + command)
-        ret = os.system(command)
-        print(ret)
+        ret = exec_command(command)
         if not ret == 0:
+            exec_command('git checkout master')
             break
