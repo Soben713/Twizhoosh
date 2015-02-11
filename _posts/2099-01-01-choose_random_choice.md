@@ -1,9 +1,4 @@
----
-layout: post
-title: Choose a Random Choice
-source: https://github.com/Soben713/Twizhoosh/tree/master/scripts/twitter_related/choose_random_choice
----
-    
+---layout: posttitle: Choose a Random Choicesource: https://github.com/Soben713/Twizhoosh/tree/master/scripts/twitter_related/choose_random_choice---
 Put a list of choices in paranthesis separated by `|`, `\` or `/` and Twizhoosh will choose one for you.
 
 You can even include more than one choices list in a tweet and the response will contain the choosen choices
@@ -30,4 +25,3 @@ separated by spaces.
 **Sample Response**
 
 > Red bananas
-    
