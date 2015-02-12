@@ -1,6 +1,6 @@
-# Ask To Guess Grade
+# Guess My Grade
 
-Ask Twizhoosh to guess your grade by including `what grade will I get` in your tweet.
+Ask Twizhoosh to guess your grade by including `what grade will I get` in your tweet to him.
 
 <!--more-->
 
