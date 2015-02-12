@@ -53,6 +53,7 @@ spelling_corrections = {
     ' ذغال': 'زغال',  # Space to prevent problems with the word گاذغال
     'مرحم ': 'مرهم',  # Space to prevent problems with the word مرحمت
     'دیرک ': 'تیرک',  # Space to prevent problems with the word دیرکت
+    'مذخرف': 'مزخرف',
 
     # گرته‌برداری و معنایی
     'بی‌تفاوت': 'بی‌اعتنا',
