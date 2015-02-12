@@ -12,13 +12,13 @@ Ask Twizhoosh to guess your grade by including `what grade will I get` in your t
 
 **Sample Response**
 
-> 11.5/20
+> 15.6/20
 
 ---
 
 ### Persian
 
-It also works in Persian, just include `چند می‌شم` or ‍‍‍‍`چند می‌شم؟` in your tweet.
+It also works in Persian, just include `چند می شم` or `چند می شه` in your tweet.
 
 **Sample Tweet**
 
@@ -26,5 +26,5 @@ It also works in Persian, just include `چند می‌شم` or ‍‍‍‍`چن
 
 **Sample Response**
 
-> 11.5/20
+> 15.6/20
     
