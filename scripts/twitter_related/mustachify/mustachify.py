@@ -7,13 +7,17 @@ import requests
 from core.scripts.twitter_related import on_demand
 from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
+from core.utils.regex import combine_regexes
 
 
 class Mustachify(on_demand.BaseOnTimelineDemandScript):
-    command_pattern = '.*س(ی)?بیل.*'
+    command_pattern = combine_regexes([
+        '.*س(ی)?بیل.*',
+        r'.*mustache.*',
+    ])
 
     def received_command(self, command, data, reply_function, *args, **kwargs):
-        match = re.search(self.command_pattern, command)
+        match = re.search(self.command_pattern, command, re.IGNORECASE)
 
         if match:
             log("Asked for a mustache, by {0}".format(data['user']['screen_name']))
