@@ -38,15 +38,19 @@ def collect_docs():
 
         if os.path.isfile(path):
             print("\tFound script documentation")
-            cnt -= 1
 
             readme_file = open(path)
+            first_line = readme_file.readline()
+            if '<!--ignore-->' in first_line:
+                print("\tIgnored documentation")
+                continue
+
+            cnt -= 1
+            script_name = first_line[2:].replace('\n', '')
+            content = readme_file.read()
 
             destination_file_path = os.path.join(destination_folder_path, str(cnt) + '-01-01-' + script_str + '.md')
             destination_file = open(destination_file_path, 'w+')
-
-            script_name = readme_file.readline()[2:].replace('\n', '')
-            content = readme_file.read()
 
             destination_file.write(template % {
                 'title': script_name,
