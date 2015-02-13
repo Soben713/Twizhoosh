@@ -4,11 +4,24 @@ title: Developers Guide
 permalink: /developers/
 ---
 
-## How to Contribute
- 
-Are you willing to contribute to Twizhoosh? Great. If you only need to edit a file (e.g. adding a spelling
-correction entry) you may just browse the file on Github and click on the edit icon. Github will do the rest
-for you. But if you are trying to implement a script for Twizhoosh you should:
+# Developer's Guide
+If you are already using Twizhoosh, you may be encouraged to contribute something back to it. In fact that is why
+Twizhoosh was made. You could:
+
+- Implement a new script
+- Find bugs or typos
+- Fix bugs
+- Translate an existing script to a new language
+- Help us complete the documentations
+
+This document explains how to implement new scripts and how to modify the documentations. 
+
+## First Steps With Git
+
+You don't need to be a git master to contribute to Twizhoosh. If you only need to edit a file you could just 
+browse the file on [Github](https://github.com/Soben713/Twizhoosh) and click on the edit icon.
+
+But if you are trying to do more (like implementing a new script) you should:
 
 1. Fork Twizhoosh.
 2. Create your script branch: `git checkout -b my-new-script`
@@ -19,13 +32,34 @@ for you. But if you are trying to implement a script for Twizhoosh you should:
  
 ## Implementing a Script
 
-There are two types of scripts:
+There are two types of scripts, *twitter related scripts* and *stand-alone scripts*.
 
-1. Twitter related scripts: These scripts listen to events returned by Twitter's streaming API.
-2. Stand-alone scripts: Called repeatedly.
+Twitter related scripts listen to events returned by
+[Twitter's streaming API](https://dev.twitter.com/streaming/overview/messages-types).
+Such as new tweets, new direct messages and many more.
 
-Take a look at current scripts in `scripts` folder. Do not forget to add your scripts to `settings.py` after
-implementing.
+But Stand-alone scripts get called repeatedly (every second, but don't count on it). These kind of scripts are useful to
+implement features like tweeting a random advice at random times.
+
+### Implementing a Twitter related script
+
+See the list of twitter-related scripts in `scripts/twitter_related`. Every script has its own package containing a 
+python file with the same name as its package's name and a `README.md` file. The empty `__init__.py` file is also necessary
+to indicate that it's a python package.
+
+Inside the python file, there should at least be a class with again the same name of the python file but in camel case form.
+
+Your class should be a subclass of `BaseTwitterRelatedScript`.
+But you will usually extend a sub-class of this class like `BaseTimelineScript` or `BaseDirectMessageScript` 
+to implement your script.
+
+Twitter related base classes are written in `core/scripts/twitter_related`.
+
+### Implementing a Stand-alone scripts ###
+
+Structure of stand-alone scripts are very much like twitter-related scripts but they should extend `BaseStandaloneScript`.
+
+Standalone base classes are written in `core/scripts/standalone`.
 
 ## Testing
 Before submitting a pull request, test your script by running `twizhoosh.py`.
