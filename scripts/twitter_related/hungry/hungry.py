@@ -28,8 +28,8 @@ class Hungry(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
             url = 'http://chibepazam.com/'
             page = BeautifulSoup(urllib.request.urlopen(url).readall().decode('utf-8'))
             food_name = page.select('div.title')[0].string.replace('\r|\n','')
-            receipe_url = page.select('img[src$=ok.gif]')[0].parent['href']
+            recipe_url = page.select('img[src$=ok.gif]')[0].parent['href']
 
-            response = '@{0} {1} {2}'.format(data['user']['screen_name'], food_name, receipe_url)
+            response = '{0} {1}'.format(food_name, recipe_url)
             reply_message(response)
             EventDispatcherSingleton().terminate_scripts()
