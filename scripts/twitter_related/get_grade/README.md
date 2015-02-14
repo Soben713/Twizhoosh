@@ -2,13 +2,13 @@
 
 Ask Twizhoosh to guess your grade by including `what grade will I get` in your tweet to him.
 
-<!--more-->
-
 ---
 
 **Sample Tweet**
 
 > @twizhoosh What grade will I get in Operating Systems?
+
+<!--more-->
 
 **Sample Response**
 

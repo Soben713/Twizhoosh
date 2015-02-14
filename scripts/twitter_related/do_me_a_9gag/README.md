@@ -2,13 +2,13 @@
 
 Include `9gag` in your tweet to twizhoosh to receive a link to a 9gag post.
 
-<!--more-->
-
 ---
 
 **Sample Tweet**
 
 > @twizhoosh 9gag me something...
+
+<!--more-->
 
 **Sample Response**
 
