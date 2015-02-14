@@ -20,12 +20,13 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "spell_checker",
     "choose_random_choice",
     "mustachify",
+    "hungry",
+    "do_me_a_9gag",
     "get_grade",
     "good_night",
     "reply_by_learned_replies",
     "learn_to_reply",
     "nobody_cares",
-    "hungry",
 ]
 
 # Ordered list of installed standalone scripts
