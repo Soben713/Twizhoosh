@@ -6,13 +6,13 @@ source: https://github.com/Soben713/Twizhoosh/tree/master/scripts/twitter_relate
 
 Include `mustache` in your tweet to Twizhoosh and you will get a response with a mustache on your profile picture (if possible).
 
-<!--more-->
-
 ---
 
 **Sample Tweet**
 
 > @twizhoosh Could you please put a mustache on my face? :)
+
+<!--more-->
 
 ---
 
