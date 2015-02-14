@@ -14,7 +14,7 @@ from core.utils.regex import combine_regexes
 
 class Hungry(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
     command_pattern = combine_regexes([
-        r'چ(ی|ه) بخوری؟م',
+        r'چ(ی|ه) بخوری?م',
         r'گ(رس|ش)نمه',
         r'چ(ی|ه) بپزم',
         r'hungry'])
