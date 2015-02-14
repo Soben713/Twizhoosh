@@ -25,6 +25,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "reply_by_learned_replies",
     "learn_to_reply",
     "nobody_cares",
+    "hungry",
 ]
 
 # Ordered list of installed standalone scripts
