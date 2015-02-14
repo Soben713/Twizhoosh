@@ -9,7 +9,7 @@ class BaseOnDemandedScript(BaseTwitterRelatedScript):
     is_mentioned_regex = r'.*(tw*izho*u*sh|[ت|ط][ی|ي][ظ|ز|ذ|ض][ه|ح]و*ش)\S* (?P<command>.*)'
 
     @abstractmethod
-    def received_command(self, command, data, reply_function, *args, **kwargs):
+    def received_command(self, command, data, reply_function, sender, *args, **kwargs):
         """
         :param command: The command text
         :param reply_function: A function that receives the reply message and replies. This may tweet, or send direct
@@ -32,7 +32,8 @@ class BaseOnDemandedScript(BaseTwitterRelatedScript):
 class BaseOnTimelineDemandScript(BaseTimelineScript, BaseOnDemandedScript):
     def received_timeline_command(self, command, data):
         reply_function = lambda x: self.twitter.reply_to(data, x)
-        self.received_command(command, data, reply_function)
+        sender = data['user']
+        self.received_command(command, data, reply_function, sender)
 
     def on_timeline_update(self, data):
         command = self.is_mentioned_command(data['text'])
@@ -44,7 +45,8 @@ class BaseOnDirectMessageDemandScript(BaseDirectMessageScript, BaseOnDemandedScr
     def received_direct_command(self, command, data):
         reply_function = lambda x: self.twitter.send_direct_message(text=x,
                                                                     user_id=data['direct_message']['sender']['id_str'])
-        self.received_command(command, data, reply_function)
+        sender = data['direct_message']['sender']
+        self.received_command(command, data, reply_function, sender)
 
     def on_direct_message(self, data):
         """

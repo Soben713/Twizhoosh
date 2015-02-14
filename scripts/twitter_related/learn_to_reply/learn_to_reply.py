@@ -20,7 +20,7 @@ class LearnToReply(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
         self.teacher_screen_name = data['user']['screen_name']
         super(LearnToReply, self).received_timeline_command(command, data)
 
-    def received_command(self, command, data, reply_function, *args, **kwargs):
+    def received_command(self, command, data, reply_function, sender, *args, **kwargs):
         match = re.search(self.command_pattern, command)
         if match:
             x = match.group('x')

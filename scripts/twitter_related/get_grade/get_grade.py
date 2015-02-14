@@ -13,7 +13,7 @@ class GetGrade(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
         r'.*what grade will i get.*'
     ])
 
-    def received_command(self, command, data, reply_message, *args, **kwargs):
+    def received_command(self, command, data, reply_message, sender, *args, **kwargs):
         if re.search(self.command_pattern, command, re.IGNORECASE):
             # Probability of the grade being between second and third items
             probs = [

@@ -25,7 +25,7 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
     answer_once = False
 
     def on_timeline_update(self, data):
-        marked = self.st_memory.is_person_marked(self.__class__.__name__, data)
+        marked = self.st_memory.is_person_marked(self.__class__.__name__, data['user']['screen_name'])
 
         if not self.answer_once or not marked:
             for i in range(len(self.replies)):
@@ -35,7 +35,7 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
                         log('matched')
                         try:
                             if self.answer_once:
-                                self.st_memory.mark_person(self.__class__.__name__, data)
+                                self.st_memory.mark_person(self.__class__.__name__, data['user']['screen_name'])
                             self.twitter.reply_to(data, random.choice(reply['reply_messages']))
 
                             EventDispatcherSingleton().terminate_scripts()
