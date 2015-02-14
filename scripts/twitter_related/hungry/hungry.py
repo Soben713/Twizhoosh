@@ -23,13 +23,19 @@ class Hungry(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
         match = re.search(self.command_pattern, command, re.IGNORECASE)
 
         if match:
-            log("{0} is hungry".format(data['user']['screen_name']))
+            if not self.st_memory.is_person_marked('hungry', data, 3):
+                # Mark them
+                self.st_memory.mark_person('hungry', data)
 
-            url = 'http://chibepazam.com/'
-            page = BeautifulSoup(urllib.request.urlopen(url).readall().decode('utf-8'))
-            food_name = page.select('div.title')[0].string.replace('\r|\n','')
-            recipe_url = page.select('img[src$=ok.gif]')[0].parent['href']
+                log("{0} is hungry".format(data['user']['screen_name']))
 
-            response = '{0} {1}'.format(food_name, recipe_url)
-            reply_message(response)
-            EventDispatcherSingleton().terminate_scripts()
+                url = 'http://chibepazam.com/'
+                page = BeautifulSoup(urllib.request.urlopen(url).readall().decode('utf-8'))
+                food_name = page.select('div.title')[0].string.replace('\r|\n','')
+                recipe_url = page.select('img[src$=ok.gif]')[0].parent['href']
+
+                response = '{0} {1}'.format(food_name, recipe_url)
+                reply_message(response)
+                EventDispatcherSingleton().terminate_scripts()
+            else:
+                self.twitter.reply_to(data, ':)')
