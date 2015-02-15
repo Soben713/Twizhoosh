@@ -96,4 +96,5 @@ spelling_corrections = {
     '#qod([cC]|(30))': '#QodC',
     '#Qod([c]|(30))': '#QodC',
     '#قدسی': '#QodC',
+    'حوس': 'هوس',
 }
