@@ -5,6 +5,7 @@ CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', None)
 CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', None)
 OAUTH_TOKEN = os.environ.get('TWITTER_OAUTH_TOKEN', None)
 OAUTH_TOKEN_SECRET = os.environ.get('TWITTER_OAUTH_TOKEN_SECRET', None)
+WOLFRAM_APPID = os.environ.get('WOLFRAM_APPID', None)
 
 DEBUG = (os.environ.get('DEBUG', "True") == "True")
 
@@ -26,6 +27,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "good_night",
     "reply_by_learned_replies",
     "learn_to_reply",
+    "wolfram",
     "nobody_cares",
 ]
 

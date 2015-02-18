@@ -5,6 +5,7 @@ from urllib import request
 from bs4 import BeautifulSoup
 import requests
 from core.scripts.twitter_related import on_demand
+from core.twitter_related_scripts_runner import EventDispatcherSingleton
 from core.utils.logging import log
 import settings
 
@@ -43,6 +44,7 @@ class DoMeA9gag(on_demand.BaseOnTimelineDemandScript):
                         in_reply_to_status_id=data['id_str']
                     )
 
+                    EventDispatcherSingleton().terminate_scripts()
                     break
                 except Exception:
                     pass

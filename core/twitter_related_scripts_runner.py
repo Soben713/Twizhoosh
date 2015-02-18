@@ -89,14 +89,17 @@ class EventDispatcherSingleton(TwythonStreamer, metaclass=Singleton):
         log("Data: {0}".format(data))
 
         for script in self.scripts.setdefault(data_type, []):
-            log("Data type: {1} script found: {0}".format(script.__class__.__name__, data_type))
+            script_name = script.__class__.__name__
+
+            log("Data type: {1} script found: {0}".format(script_name, data_type))
             try:
                 getattr(script, 'on_' + data_type)(data)
             except DoNotCallOtherScripts:
                 break
             except TwythonError as e:
-                log("Twython error when occurred when running script {0}\nError is:{1}".format(
-                    script.__class__.__name__, e))
+                log("Twython error when occurred when running script {0}\nError is:{1}".format(script_name, e))
+            except Exception as e:
+                log("Some exception occurred during execution of %s \n %s" % (script_name, e))
 
     def on_error(self, status_code, data):
         log("Error streaming [{0}]: {1}".format(status_code, data))

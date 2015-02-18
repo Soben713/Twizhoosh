@@ -2,7 +2,7 @@ import re
 
 from core.scripts.twitter_related import on_demand, base
 from core.utils.logging import log
-from core.twitter_related_scripts_runner import DataParser
+from core.twitter_related_scripts_runner import DataParser, EventDispatcherSingleton
 
 
 class LearnToReply(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
@@ -49,3 +49,4 @@ class LearnToReply(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
 
             # reply_function is not used because we send a direct message regardless of message type
             self.twitter.send_direct_message(text=reply_message, user_id=self.teacher_id)
+            EventDispatcherSingleton().terminate_scripts()
