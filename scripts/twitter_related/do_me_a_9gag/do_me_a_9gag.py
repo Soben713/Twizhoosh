@@ -43,8 +43,7 @@ class DoMeA9gag(on_demand.BaseOnTimelineDemandScript):
                         media=BytesIO(img),
                         in_reply_to_status_id=data['id_str']
                     )
-
-                    EventDispatcherSingleton().terminate_scripts()
                     break
                 except Exception:
                     pass
+            EventDispatcherSingleton().terminate_scripts()
