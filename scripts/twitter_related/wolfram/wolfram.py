@@ -7,9 +7,9 @@ from settings import WOLFRAM_APPID
 
 
 class Wolfram(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
-    ignore_titles = [
-        "Input",
-        "Input interpretation",
+    pods_white_list = [
+        'Result',
+        'Response',
     ]
 
     replaces = [
@@ -27,7 +27,7 @@ class Wolfram(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
 
             # Find the first pod that's not an input interpretation pot
             for pod in res.pods:
-                if pod.title not in self.ignore_titles and hasattr(pod, 'text'):
+                if pod.title in self.pods_white_list and hasattr(pod, 'text'):
                     text = self.process_response(pod.text)
                     reply_function(text)
                     EventDispatcherSingleton().terminate_scripts()
