@@ -24,7 +24,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "hungry",
     "do_me_a_9gag",
     "get_grade",
-    "good_night",
+    # "good_night",
     "reply_by_learned_replies",
     "learn_to_reply",
     "wolfram",
@@ -33,7 +33,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
 
 # Ordered list of installed standalone scripts
 INSTALLED_STANDALONE_SCRIPTS = [
-    "call_sherrgoo",
+    # "call_sherrgoo",
     "give_advice",
 ]
 
