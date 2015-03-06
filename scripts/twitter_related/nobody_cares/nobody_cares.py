@@ -10,7 +10,7 @@ from core.utils.logging import log
 
 class NobodyCares(base.BaseTimelineScript):
     def on_timeline_update(self, data):
-        do_reply = (random.randint(0, 500) == 0)
+        do_reply = (random.randint(0, 1000) == 0)
         if not do_reply or data.get('in_reply_to_status_id_str', None) or data['entities']['user_mentions'] or len(
                 data['text']) == 0:
             return

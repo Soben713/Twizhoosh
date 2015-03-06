@@ -6,7 +6,7 @@ from core.utils.logging import log
 
 
 class GiveAdvice(TweetPerDayBase):
-    expected_tweet_per_day = 1
+    expected_tweet_per_day = 0.3
 
     def update(self):
         # TODO: get json from http://api.adviceslip.com/advice/{i} 0<i<188, for non-repetitive results
