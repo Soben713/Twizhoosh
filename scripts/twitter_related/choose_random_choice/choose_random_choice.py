@@ -7,6 +7,13 @@ from core.utils.farsi_tools import add_dummy_spaces
 
 
 class ChooseRandomChoice(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
+    synonyms = {
+        'آره': ['اوهوم', 'بله'],
+        'نه': ['خیر', 'نچ']
+    }
+
+    REPLACE_WITH_SYNONYM_POSSIBILITY = 0.5
+
     def received_command(self, command, data, reply_function, sender, *args, **kwargs):
         has_p_regex = r'\(([^)]*)\)'
         choices_list = re.findall(has_p_regex, command)
@@ -18,7 +25,10 @@ class ChooseRandomChoice(on_demand.BaseOnDirectMessageOrTimelineDemandScript):
             choices = re.split(r'[\\|/|\|]', choices_str)
             if len(choices) <= 1:
                 continue
-            answer += random.choice(choices) + " "
+            choice = random.choice(choices)
+            if choice in self.synonyms and random.random() <= self.REPLACE_WITH_SYNONYM_POSSIBILITY:
+                choice = random.choice(self.synonyms[choice])
+            answer += choice + " "
 
         if answer == "":
             return
