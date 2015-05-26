@@ -19,11 +19,11 @@ def get_google_image(phrase, index):
     return get_first_image_url_from_response(obj)
 
 
-def get_random_google_image(phrase):
+def get_random_google_image(phrase, find_in_first=60):
     r1 = get_json_response(phrase, 1)
     estimated_results = int(r1['responseData']['cursor']['estimatedResultCount'])
     # 60 is the maximum number google returns
-    domain = min(60, estimated_results)
+    domain = min(find_in_first, 60, estimated_results)
     index = random.randint(0, domain)
     r2 = get_json_response(phrase, index)
     return get_first_image_url_from_response(r2)
