@@ -17,7 +17,7 @@ class GoodNight(reply_by_keyword_base.BaseReplyByKeywordScript):
                    'reply_messages': []
                }]
 
-    search_phrases = ['goodnight', 'goodnight quotes']
+    search_phrases = ['goodnight', 'goodnight quotes', 'goodnight quotes tumblr']
     answer_once = True
 
     def reply(self, data, keyword, reply):
