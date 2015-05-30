@@ -21,21 +21,20 @@ class BaseReplyByKeywordScript(BaseTimelineScript):
 
     replies = []
 
-    # If True, responds only once until short memory is cleaned
-    answer_once = False
+    # Number of times it replies before short memory is cleaned
+    max_answers = 10
 
     def on_timeline_update(self, data):
-        marked = self.st_memory.is_person_marked(self.__class__.__name__, data['user']['screen_name'])
+        marked = self.st_memory.is_person_marked(self.__class__.__name__, data['user']['screen_name'], self.max_answers)
 
-        if not self.answer_once or not marked:
+        if not marked:
             for i in range(len(self.replies)):
                 reply = self.replies[i]
                 for keyword in reply['keywords']:
                     if re.findall(keyword, data['text']):
                         log('matched')
                         try:
-                            if self.answer_once:
-                                self.st_memory.mark_person(self.__class__.__name__, data['user']['screen_name'])
+                            self.st_memory.mark_person(self.__class__.__name__, data['user']['screen_name'])
                             self.reply(data, keyword, reply)
 
                         except TwythonError as e:

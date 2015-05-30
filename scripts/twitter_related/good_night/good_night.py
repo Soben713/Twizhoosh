@@ -18,7 +18,7 @@ class GoodNight(reply_by_keyword_base.BaseReplyByKeywordScript):
                }]
 
     search_phrases = ['goodnight', 'goodnight quotes', 'goodnight quotes tumblr']
-    answer_once = True
+    max_answers = 2
 
     def reply(self, data, keyword, reply):
         img_url = get_random_google_image(random.choice(self.search_phrases))

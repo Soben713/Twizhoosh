@@ -5,6 +5,8 @@ from core.scripts.twitter_related import reply_by_keyword_base
 
 
 class SpellChecker(reply_by_keyword_base.BaseReplyByKeywordScript):
+    max_answers = 50
+
     def __init__(self, *args, **kwargs):
         super(SpellChecker, self).__init__(*args, **kwargs)
         # Add spelling corrections to @replies
