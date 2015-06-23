@@ -29,7 +29,7 @@ INSTALLED_TWITTER_RELATED_SCRIPTS = [
     "learn_to_reply",
     "are_you_there",
     "wolfram",
-    "nobody_cares",
+    # "nobody_cares",
 ]
 
 # Ordered list of installed standalone scripts
