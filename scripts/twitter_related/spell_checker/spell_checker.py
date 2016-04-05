@@ -14,7 +14,7 @@ class SpellChecker(reply_by_keyword_base.BaseReplyByKeywordScript):
 
         for wrong in spelling_corrections.keys():
             self.replies.append({
-                'keywords': [wrong],
+                'keywords': ['\\b' + wrong + '\\b'],
                 'reply_messages': ['{0}*'.format(spelling_corrections[wrong])]
             })
 
