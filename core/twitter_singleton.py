@@ -49,9 +49,21 @@ class TwitterSingleton(metaclass=Singleton):
         status = '@{0} {1}'.format(tweet_data['user']['screen_name'], status)
         self.tweet(status=status, in_reply_to_status_id=tweet_data['id_str'], *args, **kwargs)
 
-    def update_status_with_media(self, *args, **kwargs):
+    def update_status_with_media(self, status, media, in_reply_to_status_id):
+        '''
+
+        :param status:
+        :param media: is simply the un-uploaded media
+        :param in_reply_to:
+        :return:
+        '''
+
         try:
-            self.twitter.update_status_with_media(*args, **kwargs)
+            log('blah blaaeouaoeuh')
+            response = self.twitter.upload_media(media=media)
+            log('blah blah')
+            self.twitter.update_status(status=status, media_ids=[response['media_id']],
+                                       in_reply_to_status_id=in_reply_to_status_id)
             self.status_update_hooks()
         except TwythonError as e:
             log("Twython error, updating status with media: {0}".format(e))

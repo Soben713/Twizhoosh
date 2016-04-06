@@ -32,12 +32,11 @@ class Mustachify(on_demand.BaseOnTimelineDemandScript):
                 raw_url = 'http://mustachify.me/?src={0}'
                 img_url = raw_url.format(urllib.request.quote(avatar_url))
                 log("Image url: {0}".format(img_url))
-
-                img = requests.get(url=img_url).content
+                img = BytesIO(requests.get(url=img_url).content)
 
                 self.twitter.update_status_with_media(
                     status='@' + sender['screen_name'],
-                    media=BytesIO(img),
+                    media=img,
                     in_reply_to_status_id=data['id_str']
                 )
 
